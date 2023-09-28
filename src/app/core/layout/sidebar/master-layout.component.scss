@@ -1,0 +1,374 @@
+::ng-deep .mat-select {
+  white-space: inherit;
+  display: inline !important;
+}
+
+::ng-deep .mat-form-field {
+  margin: 0rem 0rem;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0em;
+}
+
+.navbar-dark {
+  position: sticky;
+  top: 0;
+  background-image: linear-gradient(to right,
+      #1691b5,
+      #1c81a8,
+      #22719a,
+      #26628b,
+      #28537b);
+  z-index: 9;
+
+  @media (min-width: 992px) {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  @media (max-width: 768px) {
+    position: fixed;
+    width: 100%;
+    z-index: 9;
+    background-color: #fff;
+    left: 0;
+    top: 0;
+    box-shadow: 0px 2px 4px #80808012;
+  }
+
+  .hamburger_menu {
+    background-color: var(--white);
+    margin-left: 10px;
+    margin-right: 10px;
+
+    // display: none;
+    @media (max-width: 768px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+    }
+
+    .mat-icon {
+      font-size: 25px;
+      color: var(--black);
+    }
+  }
+}
+
+.notif-bell i {
+  color: #000;
+  font-size: 42px;
+  position: relative;
+}
+
+.navbar-expand-md .navbar-collapse {
+  display: flex !important;
+  flex-basis: auto;
+
+  ul {
+    align-items: center;
+    margin-right: 25px;
+
+    @media (max-width: 768px) {
+      flex-direction: row;
+      margin-right: 0;
+    }
+
+    li {
+      img {
+        width: 30px;
+        height: auto;
+        margin-right: 7px;
+      }
+
+      padding: 0rem 0.5rem !important;
+      cursor: pointer;
+
+      @media (max-width: 768px) {}
+
+      mat-form-field {
+        @media (max-width: 768px) {
+          width: 100px;
+          display: none;
+        }
+      }
+
+      .profile_drop {
+        border: none;
+        background-color: transparent;
+
+        span {
+          img {
+            height: 37px;
+            width: 37px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+      }
+
+      .notif-bell {
+        padding: 0 15px !important;
+      }
+
+      a {
+        color: #fff;
+        padding: 10px;
+        font-size: 15px;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        position: relative;
+      }
+    }
+  }
+}
+
+.text-primary {
+  --bs-text-opacity: 1;
+  color: var(--black) !important;
+}
+
+.notif-bell .badge {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 26px;
+  font-size: 11px;
+  padding: 0;
+  border-radius: 50%;
+  background: #ed5b75;
+}
+
+.notif-bell:hover {
+  color: #000 !important;
+  background-color: transparent !important;
+}
+
+/* Ng Select */
+.ng-select.ng-select-single .ng-select-container {
+  background-color: #e5e5e5;
+  border-radius: 8px;
+  border: 0;
+  width: 180px;
+  box-shadow: var(--sidenav-shadow);
+}
+
+.ng-select.ng-select-single .ng-select-container {
+  height: 30px !important;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-placeholder {
+  color: #000;
+  padding-left: 10px;
+}
+
+.ng-select .ng-arrow-wrapper {
+  color: #000;
+}
+
+.ng-select.ng-select-focused:not(.ng-select-opened)>.ng-select-container {
+  border-color: #635ebe;
+  box-shadow: none;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: auto;
+  margin-top: 12px;
+  margin-right: 10px;
+}
+
+.mat-icon {
+  font-size: 25px;
+}
+
+.mat-icon .mat-badge-content {
+  color: var(--black);
+}
+
+.sideNav {
+  height: 100%;
+  overflow: scroll;
+  position: fixed;
+  background-image: var(--white);
+  transition: 0.5s;
+  box-shadow: var(--sidenav-shadow);
+  // width: 210px;
+  width: 250px; // changed
+  z-index: 999;
+
+  // top: 0;
+  @media (max-width: 768px) {
+    width: 0px;
+    top: 56px;
+  }
+}
+
+.side-container {
+  margin-top: 66px;
+  // margin-left: 210px;
+  margin-left: 250px; // changed
+  padding: 0;
+  height: calc(100% - 56px);
+  transition: all linear 0.3s;
+  -webkit-transition: all linear 0.3s;
+  -moz-transition: all linear 0.3s;
+  -ms-transition: all linear 0.3s;
+
+  @media (max-width: 768px) {
+    padding: 0 15px;
+    height: 100%;
+    margin-left: 0;
+    margin-top: 100px;
+  }
+}
+
+li a.active {
+  background-color: rgba(99, 94, 190, 0.1);
+  color: #fff;
+  border-left: 3px solid #635ebe;
+}
+
+.overlay {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(12, 24, 56, 0.32);
+  z-index: 9;
+}
+
+.wl_82 {
+  margin-left: 82px;
+  transition: all linear 0.3s;
+  -webkit-transition: all linear 0.3s;
+  -moz-transition: all linear 0.3s;
+  -ms-transition: all linear 0.3s;
+}
+
+::ng-deep .mat-option-text {
+  img {
+    width: 30px !important;
+  }
+}
+
+.border-flag {
+  border: 1px solid #f5f3fb00;
+  background-color: var(--color-primary);
+  border-radius: 5px;
+
+  img {
+    margin-right: 5px;
+  }
+
+  mat-form-field {
+    width: 17px;
+
+    ::ng-deep .mat-select-arrow {
+      color: rgb(255 255 255 / 86%);
+    }
+  }
+}
+
+.gap {
+  color: var(--black);
+  margin: 2px 8px 0px;
+  cursor: pointer !important;
+}
+
+.mailid {
+  word-break: break-all;
+  display: block;
+  white-space: break-spaces;
+}
+
+.dropdown-header .media {
+  display: flex;
+  width: 100%;
+  /* padding: 5px 10px; */
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+}
+
+.rounded_profile-img {
+  background-color: #e5e5e5;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  object-fit: fill;
+  border-radius: 50px;
+
+  img {
+    width: 100%;
+  }
+}
+
+.name-font {
+  // text-transform: uppercase;
+  font-weight: 500;
+  font-size: 15px !important;
+}
+
+.dropdown-item {
+  i {
+    color: var(--black);
+    font-size: 20px;
+  }
+}
+
+.user-prof-box {
+  display: flex;
+  align-items: center;
+
+  ::ng-deep .mat-button-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .profile-circle {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+
+    img {
+      width: 40px !important;
+      height: 40px !important;
+    }
+  }
+
+  .media-body {
+    text-align: left;
+
+    h5 {
+      color: var(--white);
+    }
+
+    .mailid {
+      line-height: 1.4;
+    }
+  }
+}
+
+
+::ng-deep #mat-select-0-panel{
+  margin-top: 38px;
+    margin-left: -27px;
+
+}

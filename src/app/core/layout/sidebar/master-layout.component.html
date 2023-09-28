@@ -1,0 +1,76 @@
+<div class="overlay"></div>
+<div class="navbar navbar-expand-md navbar-dark">
+  <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="ShowsidebarMob()" class="hamburger_menu">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+
+  </button>
+  <h3 class="text-white mt-3 pr-5">Kiosk Management System
+  </h3>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+    <ul class="navbar-nav d-flex nav-right1">
+      <li class="nav-item border-flag">
+        <img src="assets/images/{{ activeLang }}.svg" (selectionChange)="onLanguageChange()" />
+        <mat-form-field appearance="none">
+          <mat-select disableRipple [(ngModel)]="activeLang" (selectionChange)="onLanguageChange()">
+            <mat-option *ngFor="let option of languageList" [value]="option?.code">
+              <img src="assets/images/{{ option?.code }}.svg" />
+              <!-- {{ option?.value }} -->
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </li>
+      <li class="nav-item dropdown user-prof-box">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <span class="rounded-circle profile-circle">
+            <img [src]="editImageUrl" alt="" />
+          </span>
+          <div class="media-body">
+            <h5 class="mt-0 mb-0 name-font">
+              {{ currentUserDetail?.userName }}
+            </h5>
+          </div>
+        </button>
+        <mat-menu #menu="matMenu">
+          <div>
+            <div class="dropdown-header">
+              <div class="media d-user">
+                <span class="font-weight-bold mr-2 rounded_circle_profile">
+                  <div class="rounded_profile-img">
+                    <img [src]="editImageUrl" alt="" />
+                  </div>
+                </span>
+                <div class="media-body">
+                  <h5 class="mt-0 mb-0 name-font">
+                    {{ currentUserDetail?.userName }}
+                  </h5>
+                  <span class="mailid">{{ currentUserDetail?.emailId }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item d-flex align-items-center" routerLink="/profile" title="My Profile">
+              <i class="la la-user fa-2x mr-2"></i>
+              <p class="gap">
+                {{ "PROFILE_DROPDOWN.PROFILE_NAME" | translate }}
+              </p>
+            </a>
+
+            <a class="dropdown-item d-flex align-items-center" (click)="onLogOut()" title="Sign Out"><i
+                class="la la-sign-out fa-2x mr-2"></i>
+              <p class="gap">{{ "PROFILE_DROPDOWN.SIGN_OUT" | translate }}</p>
+            </a>
+          </div>
+        </mat-menu>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="sideNav">
+  <app-aside-nav></app-aside-nav>
+</div>
+
+<div class="side-container">
+  <router-outlet></router-outlet>
+</div>

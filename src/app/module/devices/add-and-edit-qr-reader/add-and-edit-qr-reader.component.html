@@ -1,0 +1,63 @@
+<div class="green-bg">
+    <section class="visitor-addmision main-page">
+        <div class="container">
+            <div class="visitor-addmission-inner">
+                <section class="visitor-list">
+                    <div class="main-heading-div">
+                        <h2 class="main-head" *ngIf="!isEditing">Add QR Reader</h2>
+                        <h2 class="main-head" *ngIf="isEditing">Edit Location</h2>
+                    </div>
+                    <form class="addusers" [formGroup]="qrReaderForm">
+                        <div class="row">
+                            <!-- Device Name -->
+                            <div class="col-md-6 add-feild">
+                                <label>Device Name </label>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <input placeholder="Enter Device Name" name="deviceName" [formControl]="qrReaderForm.controls['deviceName']" matInput  type="text" />
+                                    </mat-form-field> 
+                                    <mat-error *ngIf="qrReaderForm.get('deviceName').hasError('required') && qrReaderForm.get('deviceName').touched">Device name is required</mat-error>
+                                    <mat-error *ngIf="qrReaderForm.get('deviceName').hasError('minlength')">Device name should be minimum 3 characters </mat-error>
+                                    </div>
+                            </div>
+
+                            <!-- Host Name -->
+                            <div class="col-md-6 add-feild">
+                                <label>Host Name</label>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <input matInput placeholder="Enter Host Name" name="address" [formControl]="qrReaderForm.controls['hostName']" matInput   type="text" />
+                                    </mat-form-field> 
+                                    <mat-error *ngIf="qrReaderForm.get('hostName').hasError('required') && qrReaderForm.get('hostName').touched">Host name is required</mat-error>
+                                    <mat-error *ngIf="qrReaderForm.get('hostName').hasError('minlength')">Host name should be minimum 3 characters </mat-error>
+                                    </div>
+                            </div>
+
+                            <!-- Port -->
+                            <div class="col-md-6 add-feild">
+                                <label>Port</label>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <input matInput placeholder="Enter I/O box port number" name="port" [formControl]="qrReaderForm.controls['port']" matInput matInput (keypress)="keyPressContact($event)" (paste)="$event.preventDefault()" />
+                                    </mat-form-field> 
+                                    <mat-error *ngIf="qrReaderForm.get('port').hasError('required') && qrReaderForm.get('port').touched">Port is required</mat-error>
+                                    </div>
+                            </div>
+
+                        </div>
+                        <div class="row justify-content-end d-flex">
+                            <div class="col-md-6 button-save">
+                                <label>&nbsp;</label>
+                                <div class="justify-content-end d-flex">
+                                    <button class="btn-style btn-save" mat-raised-button [disabled]="!qrReaderForm.valid" *ngIf="!isEditing" (click)="saveQr()">Save</button>
+                                    <button class="btn-style btn-save" mat-raised-button [disabled]="!qrReaderForm.valid" *ngIf="isEditing" (click)="updateQr()">Update</button>
+                                    <button class="btn-style btn-cancel" mat-raised-button (click)="Cancel()">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </section>
+</div>

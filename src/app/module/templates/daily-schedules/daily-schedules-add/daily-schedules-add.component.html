@@ -1,0 +1,132 @@
+<div class="green-bg">
+    <section class="visitor-addmision main-page">
+        <div class="container">
+            <div class="visitor-addmission-inner">
+                <div class="main-heading-div">
+                    <h2 class="main-head">{{ "REPORTS.DAILY-SCHE" | translate }}</h2>
+                </div>
+                <div class="accordion-class">
+                    <form [formGroup]="orderForm">
+                        <div class="head-form">
+                            <div class="d-flex-input form-fields">
+                                <mat-label class="input-label">{{ "REPORTS.SCHE-NAME" | translate }}
+                                    <span class="star">*</span></mat-label>
+                                <div class="api-fill">
+                                    <mat-form-field appearance="fill">
+                                        <input type="text" maxlength="25" [formControl]="orderForm.controls['scheduleName']" matInput placeholder="Sentosa" />
+                                        <mat-icon class="check-icon-input" matSuffix>check_circle</mat-icon>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="orderForm.get('scheduleName').hasError('required') && orderForm.get('scheduleName').touched">Schedule name required</mat-error>
+                                    <mat-error *ngIf="orderForm.get('scheduleName').hasError('minlength')">Schedule name should be minimum 3 characters </mat-error>
+                                </div>
+                                <div>
+              <button class="btn-style btn-save" mat-raised-button [disabled]="!orderForm.valid" (click)="addItem()">
+                <mat-icon>add</mat-icon>  {{ "REPORTS.SCHE-ADD" | translate }}
+              </button>
+            
+            </div>
+                            </div>
+                        </div>
+
+                        <div class="input-heading">
+                            <h3 class="h3-one">
+                                {{ "REPORTS.DAYWEEK" | translate }} <span class="star">*</span>
+                            </h3>
+                            <h3 class="h3-two">
+                                {{ "REPORTS.START_TIME" | translate }} <span class="star">*</span>
+                            </h3>
+                            <h3 class="h3-three">
+                                {{ "REPORTS.END_TIME" | translate }} <span class="star">*</span>
+                            </h3>
+                        </div>
+
+                        <div>
+                            <!-- <div formArrayName="scheduleDetails" *ngFor="let item of orderForm.get('scheduleDetails')?.controls; let i = index"> -->
+                            <div formArrayName="scheduleDetails" *ngFor="let _ of orderForm.get('scheduleDetails')?.controls; index as i">
+                                <ng-container *ngIf="orderForm.get('scheduleDetails')?.controls[orderForm.get('scheduleDetails')?.controls.length - 1 - i] as item">
+                                    <mat-card [formGroupName]="i">
+                                        <!-- <div>
+                  {{item | json}}
+                </div> -->
+                                        <mat-card-content>
+                                            <!-- <form> -->
+                                            <div class="form-div">
+                                                <div class="d-flex-input form-fields">
+                                                    <mat-label class="input-label">{{ "REPORTS.DAYWEEK" | translate }}
+                                                        <span class="star">*</span></mat-label>
+                                                    <mat-form-field appearance="fill" class="mat-form-field-line w-270">
+                                                        <!-- <mat-select placeholder="Select Day" #select (selectionChange)="onDaySelection($event, i)" [formControl]="item.controls['dayNo']"> -->
+                                                            <mat-select placeholder="Select Day" #select  [formControl]="item.controls['dayNo']">
+                                                            <div class="select-all">
+                                                                <mat-option *ngFor="let day of days" [value]="day?.id"  (click)="selectweakday(day, orderForm.get('scheduleDetails')?.controls.length-(i+1))">{{ day?.name }}
+                                                                </mat-option>
+                                                            </div>
+                                                        </mat-select>
+                                                        <!-- <mat-error *ngIf="submitted && orderForm['controls']['dayNo']?.errors?.required"> -->
+
+                                                    </mat-form-field>
+
+
+
+                                                    <mat-label class="input-label">{{ "REPORTS.START_TIME" | translate }}
+                                                        <span class="star">*</span></mat-label>
+                                                    <mat-form-field appearance="fill" class="mat-form-field-line">
+                                                        <!-- <mat-select placeholder="Select Start Time" #select [formControl]="item.controls['showStartTime']" (selectionChange)="changeStartDate($event.value,orderForm.get('scheduleDetails')?.controls.length-(i+1))"> -->
+                                                            <mat-select placeholder="Select Start Time" #select [formControl]="item.controls['startTime']">
+                                                            <div class="select-all">
+                                                                <mat-option  *ngFor="let time of timingArray; let startTimeIndex=index" [value]="time"  (click)="startTimeSlot(time,orderForm.get('scheduleDetails')?.controls.length-(i+1),startTimeIndex)">
+                                                                    {{ time }}
+                                                                </mat-option>
+                                                            </div>
+                                                        </mat-select>
+
+                                                    </mat-form-field>
+
+                                                    <mat-label class="input-label">{{ "REPORTS.END_TIME" | translate }}
+                                                        <span class="star">*</span></mat-label>
+                                                    <mat-form-field appearance="fill" class="mat-form-field-line">
+
+                                                        <!-- <mat-select placeholder="Select End Time" #select [formControl]="item.controls['showEndTime']" (selectionChange)="changeEndDate($event.value,orderForm.get('scheduleDetails')?.controls.length-(i+1))"> -->
+                                                            <mat-select placeholder="Select End Time" #select [formControl]="item.controls['endTime']">
+                                                            <div class="select-all">
+                                                                <mat-option *ngFor="let time of timingArray; let endTimeIndex=index"[value]="time"
+                                                                (click)="endTimeSlot(time,orderForm.get('scheduleDetails')?.controls.length-(i+1),endTimeIndex)">
+                                                                    {{ time }}
+                                                                </mat-option>
+                                                            </div>
+                                                        </mat-select>
+
+                                                    </mat-form-field>
+                                                </div>
+                                                    <button *ngIf="i!=0" mat-flat-button color="warn" class="close-btn" (click)="deleteRow(orderForm.get('scheduleDetails')?.controls.length-(i+1),item)">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                                            </div>
+                                            <!-- </form> -->
+                                        </mat-card-content>
+                                    </mat-card>
+                                </ng-container>
+                            </div>
+
+                            <div class="row justify-content-end d-flex">
+                                <div class="col-md-6 button-save">
+                                    <label>&nbsp;</label>
+                                    <div class="justify-content-end d-flex">
+                                        <button class="btn-style btn-save" mat-raised-button [disabled]="!orderForm.valid" (click)="submitForm()">
+                    {{ "VISITOR_LIST.SAVE" | translate }}
+                  </button>
+
+
+                                        <button type="button" class="btn-style btn-cancel" mat-raised-button routerLink="/templates/daily-schedules">
+                    {{ "VISITOR_LIST.CLOSE" | translate }}
+                  </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

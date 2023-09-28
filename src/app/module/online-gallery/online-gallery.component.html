@@ -1,0 +1,39 @@
+<div class="green-bg">
+    <section class="main-page">
+        <div class="row m-0 mt-2" class="main-div">
+            <div class="main-heading-div">
+                <h2 class="main-head">{{ "REPORTS.ONLINE-GALL" | translate }}</h2>
+            </div>
+
+            <form class="addusers pt-1 row justify-content-between" [formGroup]="addForm">
+                <div class="form-group w-100 input-fildcl">
+                    <label for="lname" class="control-label">{{ "REPORTS.T&C" | translate }}
+                    </label>
+                    <div class="vmsadd">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-select placeholder="TC5" [formControl]="addForm.controls['protocol']">
+                                <mat-option value="http">{{ "REPORTS.TC5" | translate }}
+                                </mat-option>
+                                <mat-option value="https">{{ "REPORTS.TC6" | translate }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-error *ngIf="submitted && addForm.controls['protocol'].errors">Protocol
+                            {{ "VALIDATE.ERROR9" | translate }}
+                        </mat-error>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end margin-y">
+                    <button class="btn-style btn-save" type="submit" (click)="SaveDataRetention()" mat-raised-button [disabled]="!addForm.valid">
+                        {{ "REPORTS.SUBMIT" | translate }}
+                    </button>
+                    <button class="btn-style btn-reset" type="button" mat-raised-button (click)="addFormReset()">
+                        {{ "REPORTS.RESET" | translate }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+<!-- <app-footer></app-footer> -->

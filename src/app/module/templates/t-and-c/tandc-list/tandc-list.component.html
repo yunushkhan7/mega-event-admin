@@ -1,0 +1,51 @@
+<div class="green-bg">
+  <section class="visitor-addmision main-page">
+    <div class="container">
+      <div class="visitor-addmission-inner">
+        <div class="main-heading-div">
+          <h2 class="main-head">{{ "REPORTS.TANDC" | translate }}</h2>
+
+          <button class="add_user" [routerLink]="['add']">
+            <mat-icon>add</mat-icon> {{ "REPORTS.ADD-D" | translate }}
+          </button>
+        </div>
+        <div class="table-entries-header mb-3">
+          <div class="filters"></div>
+        </div>
+        <section class="visitor-list">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr class="table-thead-tr-color">
+                  <th scope="col">{{ "VISITOR_LIST.SN" | translate }}</th>
+                  <th scope="col">{{ "VISITOR_LIST.ACTIONS" | translate }}</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="objectArray">
+                <tr *ngFor="let user of objectArray; let i = index">
+                  <td>{{ user?.sNo }}</td>
+                  <td>
+                    <button>
+                      <mat-icon class="edit" [routerLink]="['edit', user?.id]">edit</mat-icon>
+                    </button>
+                    <button>
+                      <mat-icon class="delete" (click)="onDelete(user)">delete</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+              <ng-container *ngIf="!objectArray?.length">
+                <tr>
+                  <td colspan="8">
+                    <p class="datafound">{{ "PROFILE.NO_DATA" | translate }}</p>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- <app-footer></app-footer> -->

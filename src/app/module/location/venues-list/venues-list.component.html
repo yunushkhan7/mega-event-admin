@@ -1,0 +1,77 @@
+<div class="green-bg">
+  <section class="visitor-addmision main-page">
+      <div class="container">
+          <div class="visitor-addmission-inner">
+              <div class="main-heading-div">
+                  <h2 class="main-head">{{ "REPORTS.VENUES" | translate }}</h2>
+
+                  <button class="add_user" [routerLink]="['/location/add']">
+          <mat-icon>add</mat-icon> {{ "REPORTS.ADD-D" | translate }}
+        </button>
+              </div>
+              <div class="table-entries-header mb-3">
+                  <div class="filters"></div>
+              </div>
+              <section class="visitor-list">
+                  <div class="table-responsive">
+                      <table class="table table-striped table-w">
+                          <thead>
+                              <tr class="table-thead-tr-color">
+                                  <!-- <th scope="col">{{ "VISITOR_LIST.SN" | translate }}</th> -->
+                                  <th scope="col">
+                                      {{ "VENUE_LIST.NAME" | translate }}
+                                      <!-- <img (click)="sortData('name')" src="assets/images/sort.png" /> -->
+                                  </th>
+                                  <th scope="col">
+                                      {{ "VENUE_LIST.CODE" | translate }}
+                                      <!-- <img (click)="sortData('code')" src="assets/images/sort.png" /> -->
+                                  </th>
+                                  <th scope="col">
+                                      {{ "VENUE_LIST.ADDRESS" | translate }}
+                                  </th>
+                                  <th scope="col">
+                                      {{ "VISITOR_LIST.REMARKS" | translate }}
+                                  </th>
+
+                                  <th scope="col">{{ "VISITOR_LIST.ACTIONS" | translate }}</th>
+                              </tr>
+                          </thead>
+                          <tbody *ngIf="objectArray">
+                              <tr *ngFor="let item of objectArray; let i = index">
+                                  <td>{{ item?.name }}</td>
+                                  <td>{{ item?.code}}</td>
+                                  <td>{{ item?.address}}</td>
+                                  <td>{{ item?.remarks}}</td>
+
+                                  <td>
+                                    <div class="actions-btn">
+                                      <button>
+                    <mat-icon class="edit" (click)="gotoEdit(item?.id)">edit</mat-icon>
+                  </button>
+                                      <button>
+                    <mat-icon class="delete" (click)="onDelete(item)" *ngIf="currentUser != 'user'" >close</mat-icon>
+                  </button>
+                  </div>
+                                  </td>
+                              </tr>
+                          </tbody>
+                          <ng-container *ngIf="!objectArray?.length">
+                              <tr>
+                                  <td colspan="8">
+                                      <p class="datafound">{{ "PROFILE.NO_DATA" | translate }}</p>
+                                  </td>
+                              </tr>
+                          </ng-container>
+                      </table>
+                  </div>
+
+                  <div class="all-paginator" *ngIf="objectArray.length">
+                      <pagination [paginationList]="pagination" [selectedPageLimit]="currentPageLimit" [currentPage]="currentPage" (onPageChange)="getPage($event)" [lastPage]="lastpage">
+                      </pagination>
+                  </div>
+              </section>
+          </div>
+      </div>
+  </section>
+</div>
+<!-- <app-footer></app-footer> -->

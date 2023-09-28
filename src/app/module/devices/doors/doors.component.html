@@ -1,0 +1,223 @@
+
+<!-- <ngx-spinner></ngx-spinner> -->
+<!-- table starts -->
+<div class="green-bg">
+    <section class="visitor-addmision main-page">
+        <div class="container">
+            <div class="visitor-addmission-inner">
+                <div class="main-heading-div">
+                    <h2 class="main-head">
+                        Doors
+                    </h2>
+
+                    <button class="add_user" (click)="AddLocation()">
+            <mat-icon>add</mat-icon> 
+            Add Door
+          </button>
+                </div>
+                <div class="table-entries-header mb-3">
+                </div>
+                <section class="visitor-list">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-w">
+                            <thead>
+                                <tr class="table-thead-tr-color">
+                                    <th scope="col">S/N</th>
+                                    <th scope="col">
+                                        Name
+                                        <img (click)="sort('name')" src="assets/images/sort.png" />
+                                    </th>
+                                    <th scope="col">
+                                        Location
+                                        <img (click)="sort('locationId')" src="assets/images/sort.png" />
+                                    </th>
+                                    <th scope="col">
+                                        Direction
+                                        <img (click)="sort('direction')" src="assets/images/sort.png" />
+                                    </th>
+                                    <th scope="col">
+                                        QR Readers
+                                        <img (click)="sort('qrReaderDeviceName')" src="assets/images/sort.png" />
+                                    </th>
+                                    <th scope="col">
+                                        Ethernet I/O Box
+                                        <img (click)="sort('ethernetDeviceName')" src="assets/images/sort.png" />
+                                    </th>
+                                  
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="doorList">
+                                <tr *ngFor="let door of doorList;let d = index ">
+                                <td>{{d+1}}</td>
+                                <td>{{door?.name}}</td>
+                                <td>{{door?.venueName}}</td>
+                                <td>{{door?.direction}}</td>
+                                <td>{{door?.qrReaderDeviceName}}</td>
+                                <td>{{door?.ethernetDeviceName}}</td>
+                                    <td>
+                                        <div class="actions-btn">
+                            <button (click)="gotoEdit(door?.id)" class="btn-margin">
+                      <mat-icon class="edit" >edit</mat-icon>
+                    </button>
+                    <button (click)="onDelete(door)" class="btn-margin">
+                      <mat-icon class="delete">close</mat-icon>
+                    </button>
+                    <button class="btn-margin" (click)="unLockDoor(door?.id)">
+                        <mat-icon class="lock">lock</mat-icon>
+                        <!-- <mat-icon>lock_open</mat-icon> -->
+                      </button>
+                    </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <ng-container *ngIf="!doorList?.length">
+                                <tr>
+                                    <td colspan="8">
+                                        <p class="datafound">Data not found</p>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </table>
+                    </div>
+
+                    <div class="all-paginator" *ngIf="doorList.length">
+                        <pagination [paginationList]="pagination" [selectedPageLimit]="currentPageLimit" [currentPage]="currentPage" (onPageChange)="getPage($event)" [lastPage]="lastpage">
+                        </pagination>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- table ends -->
+
+<div class="green-bg" *ngIf="adddoor == true || editdoor == true">
+    <section class="visitor-addmision main-page">
+        <div class="container">
+            <div class="visitor-addmission-inner">
+                <section class="visitor-list">
+                    <div class="main-heading-div">
+                        <h2 class="main-head" *ngIf="adddoor == true">Add Door</h2>
+                        <h2 class="main-head" *ngIf="editdoor == true">Edit Door</h2>
+                    </div>
+                    <form class="addusers" [formGroup]="doorForm">
+                        <div class="row">
+                            <!-- Door Name-->
+                            <div class="col-md-6 add-feild">
+                                <label>Door Name</label>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <input placeholder="Enter Door Name" name="name" [formControl]="doorForm.controls['name']" matInput  type="text" />
+                                    </mat-form-field> 
+                                    <mat-error *ngIf="doorForm.get('name').hasError('required') && doorForm.get('name').touched">Name is required</mat-error>
+                                    </div>
+                            </div>
+
+                            <!-- Direction -->
+                            <div class="col-md-6 add-feild">
+                                <label>Direction</label>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-select class="readonly-block" placeholder="Select direction"  [formControl]="doorForm.controls['direction']">
+                                            <mat-option *ngFor="let dir of directions" [value]="dir.direction">
+                                                {{ dir.direction }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="doorForm.get('direction').hasError('required') && doorForm.get('direction').touched">Direction is required</mat-error>
+                                </div>
+                            </div>
+
+                            <!-- QR Reader-->
+                            <div class="col-md-6 add-feild">
+                                <label>QR Reader</label>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-select class="readonly-block" placeholder="Select QrReader id"  [formControl]="doorForm.controls['qrReaderId']">
+                                            <mat-option *ngFor="let reader of qrreaders" [value]="reader?.id">
+                                                {{ reader?.deviceName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="doorForm.get('qrReaderId').hasError('required') && doorForm.get('qrReaderId').touched">QR reader is required</mat-error>
+                                </div>
+                            </div>
+
+                             <!-- Ethernet I/O Box-->
+                             <div class="col-md-6 add-feild">
+                                <label>Ethernet I/O Box</label>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-select class="readonly-block" placeholder="Select ethernet"  [formControl]="doorForm.controls['ethernetId']">
+                                            <mat-option *ngFor="let eth of ethernets" [value]="eth?.id">
+                                                {{ eth?.deviceName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="doorForm.get('ethernetId').hasError('required') && doorForm.get('ethernetId').touched">Ethernet I/O Box is required</mat-error>
+                                </div>
+                            </div>
+
+                              <!-- Location-->
+                              <div class="col-md-6 add-feild">
+                                <label>Location</label>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-select class="readonly-block" placeholder="Select location id"  [formControl]="doorForm.controls['locationId']">
+                                            <mat-option *ngFor="let location of venueList" [value]="location?.id">
+                                                {{ location?.name }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="doorForm.get('locationId').hasError('required') && doorForm.get('locationId').touched">Location is required</mat-error>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row justify-content-end d-flex">
+                            <div class="col-md-6 button-save">
+                                <label>&nbsp;</label>
+                                <div class="justify-content-end d-flex">
+                                    <button class="btn-style btn-save" mat-raised-button [disabled]="!doorForm.valid" *ngIf="adddoor == true" (click)="SaveDoor()">Save</button>
+                                    <button class="btn-style btn-save" mat-raised-button [disabled]="!doorForm.valid" *ngIf="editdoor == true" (click)="UpdateDoor()">Update</button>
+                                    <button class="btn-style btn-cancel" mat-raised-button (click)="Cancel()">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

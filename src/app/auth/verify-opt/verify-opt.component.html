@@ -1,0 +1,74 @@
+<section class="login-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 d-none d-md-block">
+        <div class="row">
+          <div class="auth-side-wrapper"></div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="auth-form-wrapper px-4 py-5">
+
+            <div class="show">
+              <button mat-stroked-button color="black" class="btn-back" (click)="goBack()">
+                <mat-icon>arrow_back</mat-icon>
+                {{ "BUTTON.BACK" | translate }}
+              </button>
+            </div>
+
+            <div class="inner-wrap">
+              <div class="logo-sec">
+                <img src="assets/images/senoko-logo.png" alt=".." />
+                <p>{{ "LOGIN.TITLE" | translate }}</p>
+                <h2>{{ "LOGIN.SUB_TITLE" | translate }}</h2>
+              </div>
+
+              <form [formGroup]="otpForm" (ngSubmit)="submitForm()">
+                <div class="form-group paddingLabel required form-style">
+                  <h3>Enter Password Reset Code</h3>
+                  <div class="text_field">
+                    <ng-otp-input [formCtrl]="otpForm.controls['otp']" class="mt-4"
+                      [config]="{length:6, allowNumbersOnly:true}"></ng-otp-input>
+                  </div>
+                  <p *ngIf="!finished">{{ "LOGIN.OTP_EXPIRE" | translate }} {{display}}</p>
+
+                  <div *ngIf="finished">
+                    <h5 class="for-security">
+                      {{ "LOGIN.EXPIRED" | translate }}
+                    </h5>
+                    <button mat-button type="submit" class="loginbutton btn btn-primary" (click)="sendagain()">
+                      {{ "LOGIN.RESEND" | translate }}
+                      <img src="assets/images/arrow-white.svg" alt=".." class="ml-4" />
+                    </button>
+                  </div>
+
+                  <div class="button_submit" *ngIf="!finished">
+                    <a>
+                      <button mat-button type="submit" [disabled]="otpForm.invalid" class="loginbutton btn btn-primary">
+                        {{ "LOGIN.NEXT" | translate }}
+                        <img src="assets/images/arrow-white.svg" alt=".." class="ml-4" />
+                      </button>
+                    </a>
+                  </div>
+                  <h5 class="otpsent">{{ "LOGIN.OTPSENT" | translate }} {{newString}}</h5>
+                </div>
+              </form>
+
+
+              <div class="copy-rights">
+                <p>
+                  {{ "LOGIN.COPY_RIGHT" | translate }} &copy;
+                  {{ "LOGIN.SENOKO" | translate }}
+                  <span>{{ "LOGIN.ENERGY" | translate }}</span>
+                  {{ "LOGIN.PVT" | translate }}
+                  {{ "LOGIN.RESERVED" | translate }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,236 @@
+<div class="green-bg">
+    <section class="visitor-addmision main-page">
+        <div class="container">
+            <div class="visitor-addmission-inner">
+                <div class="main-heading-div">
+                    <h2 class="main-head">{{ "REPORTS.PHOTO_KIOSKS_REPORT" | translate }}</h2>
+                </div>
+
+                <mat-accordion class="example-headers-align accordion-class" multi>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{ "REPORTS.CONDITION" | translate }}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <div class="d-flex-div mb-3">
+                            <div class="d-flex">
+                                <button type="button" class="filter-btn mr-10" (click)="addFilter('and')">
+                  <i class="fa fa-filter" aria-hidden="true"></i>
+                  {{ "REPORTS.ADD" | translate }}
+                </button>
+                                <button type="button" class="filter-btn" (click)="addFilter('or')">
+                  <i class="fa fa-filter" aria-hidden="true"></i>
+                  {{ "REPORTS.ADDOR" | translate }}
+                </button>
+                            </div>
+                            <div class="d-flex">
+                                <button type="button" class="filter-btn" (click)="clearFilter()">
+                  <i class="fa fa-eraser" aria-hidden="true"></i>
+                  {{ "REPORTS.CLEAR" | translate }}
+                </button>
+                                <button type="button" class="filter-btn ml-10" (click)="searchFilters()">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                  {{ "REPORTS.SEARCH" | translate }}
+                </button>
+                            </div>
+                        </div>
+
+                        <mat-card *ngIf="andFilter?.length > 0">
+                            <mat-card-content>
+                                <form *ngFor="let and of andFilter; let i = index;">
+                                    <div class="form-div">
+                                        <div class="d-flex-input form-fields">
+                                            <mat-label class="input-label first-label-w">{{ "REPORTS.AND" | translate }}
+                                            </mat-label>
+                                            <mat-form-field appearance="fill" class="mat-form-field-line">
+                                                <mat-select placeholder="Select" (selectionChange)="selection('and', i, $event)">
+                                                    <!-- <div class="select-all">
+                            <mat-checkbox class="mat-option" [(ngModel)]="allSelected"
+                              [ngModelOptions]="{ standalone: true }" (change)="toggleAllSelection()">Booking
+                            </mat-checkbox>
+                          </div> -->
+                                                    <ng-container *ngFor="let col of column">
+                                                        <mat-option *ngIf="col.forFilter" [value]="col.name">
+                                                            {{ col.col }}
+                                                        </mat-option>
+                                                    </ng-container>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="d-flex-input form-fields">
+                                            <mat-label class="input-label">{{ "REPORTS.VALUE" | translate }}
+                                            </mat-label>
+                                            <mat-form-field appearance="fill">
+                                                <input type="text" maxlength="100" matInput placeholder="{{ 'ADD-UNRET.NAME' | translate }}" (blur)="setValue($event, i, 'and')" />
+                                                <mat-icon class="check-icon-input" matSuffix>check_circle</mat-icon>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <button type="button" mat-flat-button color="warn" class="close-btn" (click)="deleteFilter('and', i)">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                                    </div>
+                                </form>
+                            </mat-card-content>
+                        </mat-card>
+
+                        <mat-card *ngIf="orFilter?.length > 0">
+                            <mat-card-content>
+                                <form *ngFor="let or of orFilter; let k = index;">
+                                    <div class="form-div">
+                                        <div class="d-flex-input form-fields">
+                                            <mat-label class="input-label first-label-w">{{ "REPORTS.OR" | translate }}
+                                            </mat-label>
+                                            <mat-form-field appearance="fill" class="mat-form-field-line">
+                                                <mat-select placeholder="Select" (selectionChange)="selection('or', k, $event)">
+                                                    <ng-container *ngFor="let col of column">
+                                                        <mat-option *ngIf="col.forFilter" [value]="col.name">
+                                                            {{ col.col }}
+                                                        </mat-option>
+                                                    </ng-container>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="d-flex-input form-fields">
+                                            <mat-label class="input-label">{{ "REPORTS.VALUE" | translate }}
+                                            </mat-label>
+                                            <mat-form-field appearance="fill">
+                                                <input type="text" maxlength="100" matInput placeholder="{{ 'ADD-UNRET.NAME' | translate }}" (blur)="setValue($event, k, 'or')" />
+                                                <mat-icon class="check-icon-input" matSuffix>check_circle</mat-icon>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <button mat-flat-button type="button" color="warn" class="close-btn" (click)="deleteFilter('or', k)">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                                    </div>
+                                </form>
+                            </mat-card-content>
+                        </mat-card>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+                <div class="excel-div mt-4">
+                    <button class="excel-btn" (click)="downloadExcel()" matTooltip="download_excel">
+            <span><img src="assets/images/excel.svg" /></span>
+          </button>
+
+                    <!-- <button class="hideshwo">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            {{ "REPORTS.SHOW-HIDE" | translate }}
+          </button> -->
+
+                    <div class="pannel-icon" (click)="clearFilter()" matTooltip="reset">
+                        <mat-icon class="icon-s">refresh</mat-icon>
+                    </div>
+
+                    <mat-form-field appearance="fill" class="show-hide-i">
+                        <label><i class="fa fa-eye" aria-hidden="true"></i>
+              {{ "REPORTS.SHOW-HIDE" | translate }}</label>
+                        <mat-select multiple [(ngModel)]="selectedColumn">
+                            <ng-container *ngFor="let col of column">
+                                <mat-option #matOption (click)="changeValue(matOption)" *ngIf="col.forColumn" [value]="col.name">
+                                    {{ col.col }}
+                                </mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <section class="visitor-list">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-w">
+                            <thead>
+                                <tr class="table-thead-tr-color">
+                                    <th scope="col">{{ "REPORT.SL_NO" | translate }}</th>
+                                    <th scope="col" *ngIf="checkColumn('eventDateTime')">
+                                        {{ "REPORT.EVENT_TIME" | translate }}
+                                        <img (click)="sortData('eventDateTime')" src="assets/images/sort.png" />
+                                    </th>
+                                    <th scope="col" *ngIf="checkColumn('name')">
+                                        {{ "REPORT.LOCATION" | translate }}
+                                        <img (click)="sortData('name')" src="assets/images/sort.png" />
+                                    </th>
+                                    <th scope="col" *ngIf="checkColumn('UserName')">
+                                        {{ "REPORT.KIOSK_NAME" | translate }}
+                                        <img (click)="sortData('UserName')" src="assets/images/sort.png" />
+                                    </th>
+                                    <th scope="col" *ngIf="checkColumn('RFId')">
+                                        {{ "REPORT.QR_CODE" | translate }}
+                                        <img (click)="sortData('RFId')" src="assets/images/sort.png" />
+                                    </th>
+                                    <th scope="col" *ngIf="checkColumn('action')">
+                                        {{ "REPORT.ACTION" | translate }}
+                                    </th>
+                                    <!-- <th scope="col" *ngIf="checkColumn('PaymentMode')">
+                                        {{ "REPORT.PAYMENT_MODE" | translate }}
+                                    </th> -->
+                                    <th scope="col" *ngIf="checkColumn('photos')">
+                                        {{ "REPORT.NO_OF_PHOTOS" | translate }}
+                                    </th>
+                                    <!-- <th scope="col" *ngIf="checkColumn('dueAmount')">
+                                        {{ "REPORT.AMT_DUE" | translate }}
+                                    </th> -->
+                                    <th scope="col" *ngIf="checkColumn('paymentStatus')">
+                                        {{ "REPORT.PAYMENT_STATUS" | translate }}
+                                    </th>
+                                    <th scope="col" *ngIf="checkColumn('PaymentReferenceNumber')">
+                                        Trace No.
+                                    </th>
+                                    <th scope="col" *ngIf="checkColumn('email')">
+                                        Email
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="listing?.length">
+                                <tr *ngFor="let listing of listing; let i = index">
+                                    <td>{{sNo[i].sNo}}</td>
+                                    <td *ngIf="listing?.eventDateTime && checkColumn('eventDateTime')">{{listing?.eventDateTime | date: 'dd-MM-yyyy'}}<br>{{listing?.eventDateTime | date: 'hh:mm:ss'}}</td>
+                                    <td *ngIf="!listing?.eventDateTime && checkColumn('eventDateTime')">---</td>
+                                    <td *ngIf="checkColumn('name')">{{ listing?.venue }}</td>
+                                    <td *ngIf="checkColumn('UserName')">{{ listing?.kioskUser }}</td>
+                                    <td *ngIf="checkColumn('RFId')">{{ listing?.rfId }}</td>
+                                    <td *ngIf="checkColumn('action')">
+                                        <p *ngIf="listing?.printedCopyCount"> Print Photo</p>
+                                        <p *ngIf="listing?.digitalCopyCount"> Digital Photo</p>
+                                    </td>
+                                    <!-- <td *ngIf="checkColumn('PaymentMode')">{{ (listing?.paymentMode) ? listing?.paymentMode:'---'}}</td> -->
+                                    <td *ngIf="checkColumn('photos')">
+                                        <p *ngIf="listing?.printedCopyCount"> {{listing?.printedCopyCount}}</p>
+                                        <p *ngIf="listing?.digitalCopyCount"> {{listing?.digitalCopyCount }}</p>
+                                    
+                                    </td>
+                                    <!-- <td *ngIf="checkColumn('dueAmount')">{{ listing?.amount }}</td> -->
+                                    <td *ngIf="checkColumn('paymentStatus')">{{ (listing?.paymentStatus) ? listing?.paymentStatus:'N/A' }}</td>
+                                    <td *ngIf="checkColumn('PaymentReferenceNumber')">{{ (listing?.paymentReferenceNumber) ? listing?.paymentReferenceNumber:'N/A' }}</td>
+                                    <td *ngIf="checkColumn('email')">
+                                        <button mat-icon-button [disabled]="!listing?.digitalCopyCount || (listing?.paymentStatus !='Success')"  (click)="resendPhotoKioskData(listing)" color="primary" matTooltip="Resend email" >
+                                            <mat-icon  >send</mat-icon>
+                                         </button>
+                                            
+                                        </td>
+                                </tr>
+                            </tbody>
+                            <ng-container *ngIf="!listing?.length">
+                                <tr>
+                                    <td colspan="11">
+                                        <p class="datafound">{{ "PROFILE.NO_DATA" | translate }}</p>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </table>
+                    </div>
+
+                    <div class="all-paginator" *ngIf="listing?.length">
+                        <pagination [paginationList]="pagination" [selectedPageLimit]="currentPageLimit" [currentPage]="currentPage" (onPageChange)="getPage($event)" [lastPage]="lastpage"></pagination>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- <app-footer></app-footer> -->

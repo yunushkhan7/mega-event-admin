@@ -1,0 +1,106 @@
+
+
+<div class="green-bg">
+    <section class="visitor-addmision main-page">
+        <div class="container">
+            <div class="visitor-addmission-inner">
+                <section class="visitor-list">
+                    <div class="main-heading-div">
+                        <h2 class="main-head" *ngIf="!isEditing">Add Ethernet I/O </h2>
+                        <h2 class="main-head" *ngIf="isEditing">Edit Ethernet I/O</h2>
+                    </div>
+                    <form class="addusers" [formGroup]="ethernetForm">
+                        <div class="row">
+                            <!-- Device Name -->
+                            <div class="col-md-6 add-feild">
+                                <label>Device Name </label>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <input  minlength="3" placeholder="Enter Device Name" name="deviceName" [formControl]="ethernetForm.controls['deviceName']" matInput  type="text" />
+                                    </mat-form-field> 
+                                    <mat-error *ngIf="ethernetForm.get('deviceName').hasError('required') && ethernetForm.get('deviceName').touched">Device Name is required</mat-error>
+                                    <mat-error *ngIf="ethernetForm.get('deviceName').hasError('minlength')">Device name should be minimum 3 characters </mat-error>
+                                    </div>
+                            </div>
+
+                            <!-- Host Name -->
+                            <div class="col-md-6 add-feild">
+                                <label>Host Name</label>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <input matInput placeholder="Enter Host Name" name="address" [formControl]="ethernetForm.controls['hostName']" matInput   type="text" />
+                                    </mat-form-field> 
+                                    <mat-error *ngIf="ethernetForm.get('hostName').hasError('required') && ethernetForm.get('hostName').touched">Host name is required</mat-error>
+                                    <mat-error *ngIf="ethernetForm.get('hostName').hasError('minlength')">Host name should be minimum 3 characters </mat-error>
+                                    </div>
+                            </div>
+
+                            <!-- Port -->
+                            <div class="col-md-6 add-feild">
+                                <label>Port</label>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <input matInput placeholder="Enter I/O box port number" name="port" [formControl]="ethernetForm.controls['port']" matInput matInput (keypress)="keyPressContact($event)"
+                                        (paste)="$event.preventDefault()"/>
+                                    </mat-form-field> 
+                                    <mat-error *ngIf="ethernetForm.get('port').hasError('required') && ethernetForm.get('port').touched">I/O box port number is required</mat-error>
+                                    </div>
+                            </div>
+
+                            <!-- Delay Seconds -->
+                            <div class="col-md-6 add-feild">
+                                <label>Delay Seconds</label>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <input matInput placeholder="Enter I/O box delay time" name="delaySeconds" [formControl]="ethernetForm.controls['delaySeconds']"  matInput (keypress)="keyPressContact($event)" (paste)="$event.preventDefault()" />
+                                    </mat-form-field> 
+                                    <mat-error *ngIf="ethernetForm.get('delaySeconds').hasError('required') && ethernetForm.get('delaySeconds').touched">Delay seconds is required</mat-error>
+                                    </div>
+                            </div>
+
+                            <!-- Channel -->
+                            <div class="col-md-6 add-feild">
+                                <label>Channel</label>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-select class="readonly-block" placeholder="Select channel"  [formControl]="ethernetForm.controls['channel']">
+                                            <mat-option value="1">1</mat-option>
+                                            <mat-option value="2">2</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="ethernetForm.get('channel').hasError('required') && ethernetForm.get('channel').touched">Channel is required</mat-error>
+                                </div>
+                            </div>
+
+                             <!-- Status -->
+                             <div class="col-md-6 add-feild">
+                                <label>Status</label>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-select class="readonly-block" placeholder="Select Status"  [formControl]="ethernetForm.controls['status']">
+                                            <mat-option value="true">Normally Open</mat-option>
+                                            <mat-option value="false">Normally Closed</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="ethernetForm.get('status').hasError('required') && ethernetForm.get('status').touched">Status is required</mat-error>
+                                </div>
+                            </div>
+            
+                        </div>
+                        <div class="row justify-content-end d-flex">
+                            <div class="col-md-6 button-save">
+                                <label>&nbsp;</label>
+                                <div class="justify-content-end d-flex">
+                                    <button class="btn-style btn-save" mat-raised-button [disabled]="!ethernetForm.valid"  *ngIf="!isEditing" (click)="SaveEthernet()">Save</button>
+                                    <button class="btn-style btn-save" mat-raised-button [disabled]="!ethernetForm.valid" *ngIf="isEditing" (click)="UpdateEthernet()">Update</button>
+                                    <button class="btn-style btn-cancel" mat-raised-button (click)="Cancel()">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </section>
+</div>
+

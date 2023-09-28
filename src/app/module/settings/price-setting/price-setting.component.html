@@ -1,0 +1,129 @@
+<div class="green-bg">
+    <section class="main-page">
+      <div class="row m-0 mt-2" class="main-div">
+        
+        <div class="main-heading-div">
+          <h2 class="main-head">{{ "SETTINGS.PRICE-TITLE" | translate }}</h2>
+        </div>
+        <form
+          class="addusers pt-1 row justify-content-between"
+          [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+        >
+          <!-- <div class="form-group w-100 input-fildcl">
+            <label for="lname" class="control-label">
+              {{ "SETTINGS.LOCATION" | translate }}
+            </label>
+            <div class="vmsadd">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-select class="readonly-block" placeholder="Select"
+                    [formControl]="form.controls['locationId']" (selectionChange)="getData($event)">
+                    <mat-option *ngFor="let location of locationList" [value]="location?.id">
+                    {{ location?.name }}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div> -->
+          <div class="form-group w-100 input-fildcl">
+            <label for="lname" class="control-label">
+              {{ "SETTINGS.DIGITAL-COPY-PRICE" | translate }}
+            </label>
+            <div class="vmsadd">
+              <mat-form-field appearance="outline" class="w-100">
+                <input
+                  required
+                  [formControl]="form.controls['digitalcopyprice']"
+                  (keypress)="threeDigitDecimaNumber($event)"
+                  matInput
+                  placeholder="{{ 'SETTINGS.DIGITAL-COPY-PRICE' | translate }}" 
+                />
+              </mat-form-field>
+              <mat-error
+                *ngIf="submitted && form.controls['digitalcopyprice'].errors"
+              >
+                {{ "VALIDATE.ERROR10" | translate }}</mat-error
+              >
+            </div>
+          </div>
+          <div class="form-group w-100 input-fildcl">
+            <label for="lname" class="control-label">
+              {{ "SETTINGS.PHOTO-PRINT-PRICE" | translate }}
+            </label>
+            <div class="vmsadd">
+              <mat-form-field appearance="outline" class="w-100">
+                <input
+                  [formControl]="form.controls['photoprintprice']"
+                  matInput
+                   (keypress)="threeDigitDecimaNumber($event)"
+                  placeholder="{{ 'SETTINGS.PHOTO-PRINT-PRICE' | translate }}"
+                />
+              </mat-form-field>
+              <mat-error
+                *ngIf="submitted && form.controls['photoprintprice'].errors"
+              >
+                {{ "VALIDATE.ERROR10" | translate }}
+              </mat-error>
+            </div>
+          </div>
+          <div class="form-group w-100 input-fildcl">
+            <label for="lname" class="control-label">
+              {{ "SETTINGS.PRICE-CODE" | translate }}
+            </label>
+            <div class="vmsadd">
+              <mat-form-field appearance="outline" class="w-100">
+                <input
+                  [formControl]="form.controls['priceCode']"
+                  matInput
+                  placeholder="{{ 'SETTINGS.PRICE-CODE' | translate }}"
+                />
+              </mat-form-field>
+              <mat-error
+                *ngIf="submitted && form.controls['priceCode'].errors"
+              >
+                {{ "VALIDATE.ERROR10" | translate }}
+              </mat-error>
+            </div>
+          </div>
+          <div class="form-group w-100 input-fildcl">
+            <label for="lname" class="control-label">
+              {{ "SETTINGS.CURRENCY-CODE" | translate }}
+            </label>
+            <div class="vmsadd">
+              <mat-form-field appearance="outline" class="w-100">
+                <input
+                  [formControl]="form.controls['currencyCode']"
+                  matInput
+                  placeholder="{{ 'SETTINGS.CURRENCY-CODE' | translate }}"
+                />
+              </mat-form-field>
+              <mat-error
+                *ngIf="submitted && form.controls['currencyCode'].errors"
+              >
+                {{ "VALIDATE.ERROR10" | translate }}
+              </mat-error>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end margin-y">
+            <button
+              class="btn-style btn-save"
+              type="submit"
+              mat-raised-button
+              [disabled]="!form.valid"
+            >
+              {{ "SUBMIT_RESET.SUBMIT" | translate }}
+            </button>
+            <button
+              class="btn-style btn-reset"
+              type="button"
+              mat-raised-button
+              (click)="reset()"
+            >
+              {{ "SUBMIT_RESET.RESET" | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+  

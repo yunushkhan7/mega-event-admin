@@ -1,0 +1,125 @@
+
+<div class="green-bg" >
+    <section class="visitor-addmision main-page">
+        <div class="container">
+            <div class="visitor-addmission-inner">
+                <section class="visitor-list">
+                    <div class="main-heading-div">
+                        <h2 class="main-head" *ngIf="!isEditing">Add Door</h2>
+                        <h2 class="main-head" *ngIf="isEditing">Edit Door</h2>
+                    </div>
+                    <form class="addusers" [formGroup]="doorForm">
+                        <div class="row">
+                            <!-- Door Name-->
+                            <div class="col-md-6 add-feild">
+                                <label>Door Name</label>
+                                <div class="form-group ">
+                                    <mat-form-field class="example-full-width w-100" appearance="outline">
+                                        <input placeholder="Enter Door Name" name="name" [formControl]="doorForm.controls['name']" matInput  type="text" />
+                                    </mat-form-field> 
+                                    <mat-error *ngIf="doorForm.get('name').hasError('required') && doorForm.get('name').touched">Name is required</mat-error>
+                                    <mat-error *ngIf="doorForm.get('name').hasError('minlength')">Door name should be minimum 3 characters </mat-error>
+                                    </div>
+                            </div>
+
+                            <!-- Direction -->
+                            <div class="col-md-6 add-feild">
+                                <label>Direction</label>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-select class="readonly-block" placeholder="Select direction"  [formControl]="doorForm.controls['direction']">
+                                            <mat-option *ngFor="let dir of directions" [value]="dir.direction" #directionVal (click)="addAndRemoveController(directionVal?.value)">
+                                                {{ dir.direction }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="doorForm.get('direction').hasError('required') && doorForm.get('direction').touched">Direction is required</mat-error>
+                                </div>
+                            </div>
+
+                            <!-- QR Reader-->
+                            <div class="col-md-6 add-feild">
+                                <label>QR Reader</label>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-select class="readonly-block" placeholder="Select QrReader id"  [formControl]="doorForm.controls['qrReaderId']">
+                                            <mat-option *ngFor="let reader of qrreaders" [value]="reader?.id">
+                                                {{ reader?.deviceName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="doorForm.get('qrReaderId').hasError('required') && doorForm.get('qrReaderId').touched">QR reader is required</mat-error>
+                                </div>
+                            </div>
+
+                             <!-- Ethernet I/O Box-->
+                             <div class="col-md-6 add-feild">
+                                <label>Ethernet I/O Box</label>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-select class="readonly-block" placeholder="Select ethernet"  [formControl]="doorForm.controls['ethernetId']">
+                                            <mat-option *ngFor="let eth of ethernets" [value]="eth?.id">
+                                                {{ eth?.deviceName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="doorForm.get('ethernetId').hasError('required') && doorForm.get('ethernetId').touched">Ethernet I/O Box is required</mat-error>
+                                </div>
+                            </div>
+
+                              <!-- Location-->
+                              <div class="col-md-6 add-feild">
+                                <label>Location</label>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-select class="readonly-block" placeholder="Select location id"  [formControl]="doorForm.controls['locationId']">
+                                            <mat-option *ngFor="let location of venueList" [value]="location?.id">
+                                                {{ location?.name }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="doorForm.get('locationId').hasError('required') && doorForm.get('locationId').touched">Location is required</mat-error>
+                                </div>
+                            </div>
+                           
+                              <!-- Offset Value-->
+                              <div class="col-md-6 add-feild">
+                                <label>Offset Value <small>(in seconds)</small></label>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width w-100" appearance="outline">
+                                        <input placeholder="Enter Offset Value In Seconds" name="offSetValue" [formControl]="doorForm.controls['offSetValue']" matInput  type="number" keyPressNumeric />
+                                    </mat-form-field> 
+                                    <mat-error *ngIf="doorForm.get('offSetValue').hasError('required') && doorForm.get('offSetValue').touched">Offset Value is required</mat-error>
+                                    </div>
+                            </div>
+
+                              <!-- Max Time Limit-->
+                              <div class="col-md-6 add-feild" *ngIf="doorForm?.value?.direction=='IN'">
+                                <label>Max Time Limit <small>(in minutes)</small></label>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width w-100" appearance="outline">
+                                        <input placeholder="Enter Max Limit Time In Minutes" name="maxTimeLimit" [formControl]="doorForm.controls['maxTimeLimit']" matInput  type="number"  keyPressNumeric />
+                                    </mat-form-field> 
+                                    <mat-error *ngIf="doorForm.get('maxTimeLimit').hasError('required') && doorForm.get('maxTimeLimit').touched">Max Limit Time is required</mat-error>
+                                    </div>
+                            </div>
+
+
+                            
+                        </div>
+                        <div class="row justify-content-end d-flex">
+                            <div class="col-md-6 button-save">
+                                <label>&nbsp;</label>
+                                <div class="justify-content-end d-flex">
+                                    <button class="btn-style btn-save" mat-raised-button [disabled]="!doorForm.valid" *ngIf="!isEditing == true" (click)="SaveDoor()">Save</button>
+                                    <button class="btn-style btn-save" mat-raised-button [disabled]="!doorForm.valid" *ngIf="isEditing" (click)="UpdateDoor()">Update</button>
+                                    <button class="btn-style btn-cancel" mat-raised-button (click)="Cancel()">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </section>
+</div>

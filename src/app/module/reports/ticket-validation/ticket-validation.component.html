@@ -1,0 +1,210 @@
+<div class="green-bg">
+  <section class="visitor-addmision main-page">
+    <div class="container">
+      <div class="visitor-addmission-inner">
+        <div class="main-heading-div">
+          <h2 class="main-head">{{ "REPORTS.TICKET" | translate }}</h2>
+        </div>
+
+        <mat-accordion class="example-headers-align accordion-class" multi>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ "REPORTS.CONDITION" | translate }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="d-flex-div mb-3">
+              <div class="d-flex">
+                <button class="filter-btn mr-10">
+                  <i class="fa fa-filter" aria-hidden="true"></i>
+                  {{ "REPORTS.ADD" | translate }}
+                </button>
+                <button class="filter-btn">
+                  <i class="fa fa-filter" aria-hidden="true"></i>
+                  {{ "REPORTS.ADDOR" | translate }}
+                </button>
+              </div>
+              <div class="d-flex">
+                <button class="filter-btn">
+                  <i class="fa fa-eraser" aria-hidden="true"></i>
+                  {{ "REPORTS.CLEAR" | translate }}
+                </button>
+                <button class="filter-btn ml-10">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                  {{ "REPORTS.SEARCH" | translate }}
+                </button>
+              </div>
+            </div>
+
+            <mat-card>
+              <mat-card-content>
+                <form>
+                  <div class="form-div">
+                    <div class="d-flex-input form-fields">
+                      <mat-label class="input-label">{{
+                        "REPORTS.AND" | translate
+                        }}</mat-label>
+                      <mat-form-field appearance="fill" class="mat-form-field-line">
+                        <mat-select placeholder="Select" #select multiple formControlName="registerType">
+                          <div class="select-all">
+                            <mat-checkbox class="mat-option" [(ngModel)]="allSelected"
+                              [ngModelOptions]="{ standalone: true }" (change)="toggleAllSelection()">Booking
+                            </mat-checkbox>
+                          </div>
+                          <mat-option (click)="optionClick(list?.value)" *ngFor="let list of listType"
+                            [value]="list?.value">
+                            {{ list?.viewValue }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="d-flex-input form-fields">
+                      <mat-label class="input-label">{{
+                        "REPORTS.VALUE" | translate
+                        }}</mat-label>
+                      <mat-form-field appearance="fill">
+                        <input type="text" formControlName="firstName" maxlength="100" matInput
+                          placeholder="{{ 'ADD-UNRET.NAME' | translate }}" />
+                        <mat-icon class="check-icon-input" matSuffix>check_circle</mat-icon>
+                      </mat-form-field>
+                    </div>
+
+                    <button mat-flat-button color="warn" class="close-btn">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </form>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card>
+              <mat-card-content>
+                <form>
+                  <div class="form-div">
+                    <div class="d-flex-input form-fields">
+                      <mat-label class="input-label">{{
+                        "REPORTS.AND" | translate
+                        }}</mat-label>
+                      <mat-form-field appearance="fill" class="mat-form-field-line">
+                        <mat-select placeholder="Select" #select multiple formControlName="registerType">
+                          <div class="select-all">
+                            <mat-checkbox class="mat-option" [(ngModel)]="allSelected"
+                              [ngModelOptions]="{ standalone: true }" (change)="toggleAllSelection()">Booking
+                            </mat-checkbox>
+                          </div>
+                          <mat-option (click)="optionClick(list?.value)" *ngFor="let list of listType"
+                            [value]="list?.value">
+                            {{ list?.viewValue }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="d-flex-input form-fields">
+                      <mat-label class="input-label">{{
+                        "REPORTS.VALUE" | translate
+                        }}</mat-label>
+                      <mat-form-field appearance="fill">
+                        <input type="text" formControlName="firstName" maxlength="100" matInput
+                          placeholder="{{ 'ADD-UNRET.NAME' | translate }}" />
+                        <mat-icon class="check-icon-input" matSuffix>check_circle</mat-icon>
+                      </mat-form-field>
+                    </div>
+
+                    <button mat-flat-button color="warn" class="close-btn">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </form>
+              </mat-card-content>
+            </mat-card>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="excel-div mt-4">
+          <button class="excel-btn">
+            <span><img src="assets/images/excel.svg" /></span>
+          </button>
+
+          <button class="hideshwo">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            {{ "REPORTS.SHOW-HIDE" | translate }}
+          </button>
+        </div>
+
+        <section class="visitor-list">
+          <div class="table-responsive">
+            <table class="table table-striped table-w">
+              <thead>
+                <tr class="table-thead-tr-color">
+                  <th scope="col">{{ "VISITOR_LIST.SN" | translate }}</th>
+                  <th scope="col" *ngIf="Name">
+                    {{ "VISITOR_LIST.NAME" | translate }}
+                    <img (click)="sortData('firstName')" src="assets/images/sort.png" />
+                  </th>
+                  <th scope="col" *ngIf="CardNo">
+                    {{ "VISITOR_LIST.CARDS" | translate }}
+                    <img (click)="sortData('CardNo')" src="assets/images/sort.png" />
+                  </th>
+                  <th scope="col" *ngIf="Type">
+                    {{ "VISITOR_LIST.TYPE" | translate }}
+                    <img (click)="sortData('RegisterType')" src="assets/images/sort.png" />
+                  </th>
+                  <th scope="col" *ngIf="OrganizationDivision">
+                    {{ "ATTENDANCE.ORGANISATION" | translate }}
+                    <img (click)="sortData('organizationdivision')" src="assets/images/sort.png" />
+                  </th>
+                  <th scope="col" *ngIf="Host">
+                    {{ "VISITOR_LIST.HOST" | translate }}
+                    <img (click)="sortData('Host')" src="assets/images/sort.png" />
+                  </th>
+                  <th scope="col" *ngIf="AthorizedtimeStart">
+                    {{ "VISITOR_LIST.AUTHORIZED" | translate }}
+                    <img (click)="sortData('approvedstarttime')" src="assets/images/sort.png" />
+                  </th>
+                </tr>
+              </thead>
+              <tbody *ngIf="unReturnedpassList?.length">
+                <tr *ngFor="
+                    let unReturnedpassList of unReturnedpassList;
+                    let i = index
+                  ">
+                  <td>{{ unReturnedpassList?.sNo }}</td>
+                  <td *ngIf="Name">{{ unReturnedpassList?.name }}</td>
+                  <td *ngIf="CardNo">{{ unReturnedpassList?.cardNo }}</td>
+                  <td *ngIf="Type">{{ unReturnedpassList?.registerType }}</td>
+                  <td *ngIf="OrganizationDivision">
+                    {{ unReturnedpassList?.organizationdivision }}
+                  </td>
+                  <td *ngIf="Host">{{ unReturnedpassList?.host }}</td>
+                  <td *ngIf="AthorizedtimeStart">
+                    {{
+                    unReturnedpassList?.athorizedtimestart | date : "medium"
+                    }}
+                  </td>
+                </tr>
+              </tbody>
+              <ng-container *ngIf="!unReturnedpassList?.length">
+                <tr>
+                  <td colspan="9">
+                    <p class="datafound">{{ "PROFILE.NO_DATA" | translate }}</p>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+          </div>
+
+          <div class="all-paginator" *ngIf="unReturnedpassList?.length">
+            <pagination [paginationList]="pagination" [selectedPageLimit]="currentPageLimit" [currentPage]="currentPage"
+              (onPageChange)="getPage($event)" [lastPage]="lastpage">
+            </pagination>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- <app-footer></app-footer> -->

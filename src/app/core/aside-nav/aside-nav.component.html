@@ -1,0 +1,21 @@
+
+<div class="accordion mt-4">
+  <div class="accordion-tab" *ngFor="let item of itemsList; let i = index">
+    <input type="checkbox" id="{{ 'toggle' + i }}" class="accordion-toggle" name="toggle" />
+      <label class="label" for="{{ 'toggle' + i }}" (click)="routes(item)" routerLinkActive="active">
+        <i class="{{item.nodeIcon}} icon"></i>
+        <span class="name">{{ item?.nodeName }}</span>
+      </label>
+
+    <div class="accordion-content">
+      <ul class="ul">
+        <li class="mt-3 mb-2 list" *ngFor="let subItem of item.permissions">
+          <a class="a" routerLink="{{ subItem?.path }}" routerLinkActive="active">
+            <i class="fa fa-circle circle"></i>
+            {{ subItem.permissionName }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

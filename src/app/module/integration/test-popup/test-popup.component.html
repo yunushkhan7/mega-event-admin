@@ -1,0 +1,236 @@
+<div class="head-form" *ngIf="testPopUp == 'test'">
+  <div class="close-btn-outer">
+    <mat-icon class="cloes-btn" (click)="closeDialog()">clear</mat-icon>
+  </div>
+  <form [formGroup]="addForm">
+    <div class="add-feild card-test">
+      <mat-label class="input-label">{{
+        "MOM_API.INPUTTESTCARD" | translate
+      }}</mat-label>
+      <div class="form-group mom-api">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <input
+            type="text"
+            [formControl]="addForm.controls['cardNo']"
+            maxlength="100"
+            matInput
+            placeholder="Text"
+          />
+        </mat-form-field>
+        <mat-error
+          class="mt-1"
+          *ngIf="submitted && addForm.controls['cardNo'].errors"
+        >
+          {{ "VALIDATE.VALID" | translate }}
+        </mat-error>
+      </div>
+    </div>
+
+    <div class="btn-div">
+      <div>
+        <button
+          mat-stroked-button
+          class="btn-h-w btn-blue"
+          (click)="testMomApi()"
+        >
+          {{ "MOM_API.OK" | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<ng-container *ngIf="testPopUp == 'success'">
+  <mat-dialog-content class="dialog-main">
+    <div class="container-fluid">
+      <div class="acs-server-popup">
+        <div class="circle bg-green">
+          <mat-icon>done</mat-icon>
+        </div>
+        <div class="content">
+          <h3>{{ "MOM_API.MOMGATEWAY" | translate }}</h3>
+        </div>
+        <div class="actions">
+          <button
+            class="btn-h-w btn-green"
+            type="button"
+            mat-dialog-close
+            mat-raised-button
+          >
+            {{ "ACS_SETTINGS.POPUP_BUTTON" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+</ng-container>
+
+<ng-container *ngIf="testPopUp == 'faild'">
+  <mat-dialog-content class="dialog-main">
+    <div class="container-fluid">
+      <div class="acs-server-popup">
+        <div class="circle bg-red">
+          <mat-icon>close</mat-icon>
+        </div>
+        <div class="content">
+          <h3>{{ "MOM_API.MOMGATEWAYOFF" | translate }}</h3>
+        </div>
+        <div class="actions">
+          <button
+            class="btn-h-w btn-green"
+            type="button"
+            mat-dialog-close
+            mat-raised-button
+          >
+            {{ "ACS_SETTINGS.POPUP_BUTTON" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+</ng-container>
+
+<ng-container *ngIf="testPopUp == 'false'">
+  <mat-dialog-content class="dialog-main">
+    <div class="container-fluid">
+      <div class="acs-server-popup">
+        <div class="circle bg-red">
+          <mat-icon>close</mat-icon>
+        </div>
+        <div class="content">
+          <h3>Unable to connect to MOM Server</h3>
+        </div>
+        <div class="actions">
+          <button
+            class="btn-h-w btn-green"
+            type="button"
+            mat-dialog-close
+            mat-raised-button
+          >
+            {{ "ACS_SETTINGS.POPUP_BUTTON" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+</ng-container>
+
+<ng-container>
+  <div class="head-form" *ngIf="smsPopUp == 'sms'">
+    <div class="close-btn-outer">
+      <mat-icon class="cloes-btn" (click)="closeDialog()">clear</mat-icon>
+    </div>
+    <form #f="ngForm" [formGroup]="addFormSms">
+      <div class="d-flex-input form-fields form-style">
+        <mat-label class="input-label">{{
+          "MOM_API.INPUTTESTCARD2" | translate
+        }}</mat-label>
+        <div class="input-num-main">
+          <div
+            class="input-phone"
+            [ngClass]="{
+              'red-border-class':
+                submitted && addFormSms.controls['MobileNo'].errors
+            }"
+          >
+            <ng-container>
+              <ngx-intl-tel-input
+                class="example-full-width"
+                appearance="outline"
+                [preferredCountries]="['sg']"
+                [onlyCountries]="['sg']"
+                [selectedCountryISO]="selectedCountryISO"
+                [maxLength]="8"
+                [enableAutoCountrySelect]="false"
+                [selectFirstCountry]="false"
+                [enablePlaceholder]="true"
+                [searchCountryPlaceholder]="
+                  'PLACE_HOLDER.PHONE_SEARCH_COUNTRY' | translate
+                "
+                [searchCountryFlag]="false"
+                [separateDialCode]="true"
+                [phoneValidation]="true"
+                name="MobileNo"
+                formControlName="MobileNo"
+                customPlaceholder="65XXXXXX"
+                class="tel-input"
+              >
+              </ngx-intl-tel-input>
+            </ng-container>
+          </div>
+          <div *ngIf="submitted">
+            <mat-error *ngIf="f.form.controls['MobileNo']?.errors?.required"
+              >Phone Number Required</mat-error
+            >
+            <mat-error
+              *ngIf="f.form.controls['MobileNo']?.errors?.validatePhoneNumber"
+              >Invalid Phone Number</mat-error
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-div">
+        <div>
+          <button
+            mat-stroked-button
+            class="btn-h-w btn-blue"
+            (click)="testSmsGatewayApi()"
+          >
+            {{ "MOM_API.OK" | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <ng-container *ngIf="smsPopUp == 'success'">
+    <mat-dialog-content class="dialog-main">
+      <div class="container-fluid">
+        <div class="acs-server-popup">
+          <div class="circle bg-green">
+            <mat-icon>done</mat-icon>
+          </div>
+          <div class="content">
+            <h3>{{ "MOM_API.SMS_API" | translate }}</h3>
+          </div>
+          <div class="actions">
+            <button
+              class="btn-h-w btn-green"
+              type="button"
+              mat-dialog-close
+              mat-raised-button
+            >
+              {{ "ACS_SETTINGS.POPUP_BUTTON" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+  </ng-container>
+
+  <ng-container *ngIf="smsPopUp == 'faild'">
+    <mat-dialog-content class="dialog-main">
+      <div class="container-fluid">
+        <div class="acs-server-popup">
+          <div class="circle bg-red">
+            <mat-icon>close</mat-icon>
+          </div>
+          <div class="content">
+            <h3>{{ "MOM_API.SMS_API_OFFLINE" | translate }}</h3>
+          </div>
+          <div class="actions">
+            <button
+              class="btn-h-w btn-green"
+              type="button"
+              mat-dialog-close
+              mat-raised-button
+            >
+              {{ "ACS_SETTINGS.POPUP_BUTTON" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+  </ng-container>
+</ng-container>

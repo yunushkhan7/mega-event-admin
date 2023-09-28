@@ -1,0 +1,9 @@
+<div class="adbtn search-b">
+  <div class="input-group search-group">
+    <input type="text" class="form-control" #search (search)="searchAction(search?.value)" [placeholder]="placeholder"
+      aria-label="Search" aria-describedby="search-addon" />
+
+    <mat-icon (click)="searchAction(search?.value)" class="icon-1"  >search</mat-icon>
+  </div>
+  <mat-icon class="search-close" (click)="close()" class="icon-2" *ngIf="search?.value" >close</mat-icon>
+</div>

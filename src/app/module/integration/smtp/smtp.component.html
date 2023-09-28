@@ -1,0 +1,119 @@
+<div class="green-bg">
+  <section class="main-page mom">
+    <div class="container">
+      <div class="show mb-3">
+        <button mat-stroked-button color="black" class="btn-back" (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+          {{ "BUTTON.BACK" | translate }}
+        </button>
+      </div>
+      <div class="main-heading-div">
+        <h2 class="main-head">{{ "REPORTS.SMTP-S" | translate }}</h2>
+
+        <button class="add_user" (click)="testPopUp()" mat-stroked-button>
+          {{ "REPORTS.SEND-TEST" | translate }}
+        </button>
+      </div>
+      <form class="addusers" [formGroup]="addForm" (ngSubmit)="onSubmit()"> 
+        <div class="row">
+          <div class="col-md-12 add-feild">
+            <label>{{ "REPORTS.HOSTNAME" | translate }}</label>
+            <div class="form-group" [ngClass]="{ disable: isEditing }">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input [formControl]="addForm.controls['hostName']" matInput type="text" maxlength="100"
+                  placeholder="mail.stjamespowerstation.sg" />
+              </mat-form-field>
+              <mat-error
+                    *ngIf="submitted && addForm.controls['hostName'].errors"
+                    >Host Name {{ "VALIDATE.ERROR9" | translate }}</mat-error
+                  >
+            </div>
+          </div>
+
+          <div class="col-md-12 add-feild">
+            <label>{{ "REPORTS.PORTNO" | translate }}</label>
+            <div class="form-group" [ngClass]="{ disable: isEditing }">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input [formControl]="addForm.controls['portNo']" matInput type="number" maxlength="100"
+                  placeholder="465" />
+              </mat-form-field>
+              <mat-error
+                    *ngIf="submitted && addForm.controls['portNo'].errors"
+                    >Port Number {{ "VALIDATE.ERROR9" | translate }}</mat-error
+                  >
+            </div>
+          </div>
+
+          <div class="col-md-12 add-feild">
+            <label>{{ "REPORTS.FROMEMAIL" | translate }}</label>
+            <div class="form-group" [ngClass]="{ disable: isEditing }">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input [formControl]="addForm.controls['fromEmail']" matInput type="text" maxlength="100"
+                  placeholder="enquiries@stjamespowerstation.sg" />
+              </mat-form-field>
+              <!-- <mat-error
+                    *ngIf="submitted && addForm.controls['fromEmail'].errors"
+                    >{{ "VALIDATE.ERROR15" | translate }}
+                  </mat-error> -->
+
+                  <mat-error *ngIf="submitted && 
+                        addForm.get('fromEmail').hasError('required')
+                      ">
+                      Email is required
+                    </mat-error>
+                  <!-- <mat-error
+                    *ngIf="submitted && addForm.controls['fromEmail'].errors"
+                    >{{ "VALIDATE.ERROR15" | translate }}
+                  </mat-error> -->
+                  <mat-error *ngIf="submitted && 
+                  addForm.get('fromEmail').hasError('pattern')
+                ">
+                Enter valid email
+              </mat-error>
+            </div>
+          </div>
+
+          <div class="col-md-12 add-feild">
+            <label>{{ "REPORTS.SENDUSERNAME" | translate }}</label>
+            <div class="form-group" [ngClass]="{ disable: isEditing }">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input [formControl]="addForm.controls['senderUserName']" matInput type="text" maxlength="100"
+                  placeholder="SJPS Heritage Gallery" />
+              </mat-form-field>
+              <mat-error
+                    *ngIf="submitted && addForm.controls['senderUserName'].errors"
+                    >Sender User Name {{ "VALIDATE.ERROR9" | translate }}</mat-error
+                  >
+            </div>
+          </div>
+
+          <div class="col-md-12 add-feild">
+            <label>{{ "REPORTS.PASSWORD" | translate }}</label>
+            <div class="form-group" [ngClass]="{ disable: isEditing }">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input [formControl]="addForm.controls['password']" matInput type="password" maxlength="100"
+                  placeholder="Password" [type]="hide ? 'password' : 'text'"/>
+                  <mat-icon matSuffix class="eye-icon1" (click)="hide = !hide">{{ hide ? "visibility" :
+                    "visibility_off" }}>visibility</mat-icon>
+              </mat-form-field>
+              <!-- <mat-error
+                    *ngIf="submitted && addForm.controls['password'].errors"
+                    >{{ "VALIDATE.ERROR16" | translate }}
+                  </mat-error> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end margin-y">
+          <button class="btn-style btn-save" type="submit" mat-raised-button>
+            {{ "REPORTS.SUBMIT" | translate }}
+          </button>
+          <button class="btn-style btn-reset" type="button" (click)="reset()" mat-raised-button>
+            {{ "REPORTS.RESET" | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+<!-- <app-footer></app-footer> -->

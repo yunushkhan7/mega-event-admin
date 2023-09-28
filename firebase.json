@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site":"senoko-admin",
+    "public": "dist/senoko",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

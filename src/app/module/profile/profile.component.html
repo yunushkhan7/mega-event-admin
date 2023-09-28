@@ -1,0 +1,350 @@
+<div class="green-bg">
+    <div class="side_container main-page p-m-0">
+        <div class="card p-m-0">
+            <div class="main-heading-div">
+                <h2 class="main-head">{{ "PROFILE-NEW.PROFILE-TITLE" | translate }}</h2>
+            </div>
+
+            <form class="addusers" [formGroup]="addProfileForm">
+                <div class="row imaged">
+                    <div class="col-lg-2 text-lg-center" *ngIf="
+              currentUser?.roleName == 'Admin' ||
+              ('User' && role !== 'SuperAdmin')
+            ">
+                        <div class="profile-img-outer">
+                            <img [src]="base64textString ? base64textString : defaultProfileImage" alt=""
+                                width="100%" />
+                        </div>
+                        <div class="del-icon">
+                            <button color="primary" class="mat-raised-button btn-uplo btn_upload"
+                                (click)="fileInputProfile.click()">
+                                <span class="mat-button-wrapper">{{ "PROFILE-NEW.UP_PRO" | translate }} </span>
+
+                                <span class="mat-ripple mat-button-ripple"></span><span
+                                    class="mat-button-focus-overlay"></span>
+
+                                <input hidden #fileInputProfile accept="image/x-png,image/jpeg"
+                                    (change)="fileChangeEvent($event)" type="file" file-model="myFile" />
+                            </button>
+                            &nbsp; 
+
+                                <mat-icon class="delete cursur-pointer" *ngIf="base64textString" (click)="deletePopPup()">delete</mat-icon>
+                                <mat-icon class="delete cursur-not-allowed" *ngIf="!base64textString">delete</mat-icon>
+                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-10 form-field inputdisabl">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form_field">
+                                    <label for="lname" class="control-label">{{
+                                        "PROFILE-NEW.US_ACCO" | translate
+                                        }}</label>
+                                    <div class="inpu-t" disabled>
+                                        <mat-form-field appearance="outline" class="w-100 gray-color">
+                                            <input [formControl]="addProfileForm.controls['userName']" readonly matInput
+                                                placeholder="{{ 'ADD-UNRET.USERNAME' | translate }}" />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form_field">
+                                    <label for="lname" class="control-label">{{
+                                        "PROFILE-NEW.EMAIL" | translate
+                                        }}</label>
+                                    <div class="inpu-t">
+                                        <mat-form-field appearance="outline" class="w-100">
+                                            <input [formControl]="addProfileForm.controls['email']" matInput
+                                                placeholder="{{ 'ADD-UNRET.EMAIL' | translate }}"
+                                                (keydown.enter)="$event.preventDefault()" />
+                                        </mat-form-field>
+                                        <mat-error *ngIf="
+                        submitted && addProfileForm.controls['email'].errors
+                      ">{{ "VALIDATE.ERROR15" | translate }}
+                                        </mat-error>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form_field">
+                                    <label for="lname" class="control-label">{{ "PROFILE-NEW.PHONE" | translate }}
+                                    </label>
+                                    <div class="inpu-t">
+                                        <!-- <mat-form-field appearance="outline" class="w-100">
+                      <input [formControl]="addProfileForm.controls['mobileNo']"  maxlength="11" type="text"
+                        keyPressNumeric matInput
+                        placeholder="{{ 'ADD-UNRET.PHONENO' | translate }}" />
+                    </mat-form-field> -->
+
+                                        <!-- <div class="form-group"> -->
+                                        <div class="input-phone" [ngClass]="{
+                        'red-border-class':
+                          submitted && addForm.controls['mobileNo'].errors
+                      }">
+                                            <ng-container>
+                                                <ngx-intl-tel-input class="example-full-width" appearance="outline"
+                                                    [preferredCountries]="['sg']" [onlyCountries]="['sg']"
+                                                    [selectedCountryISO]="selectedCountryISO" [maxLength]="8"
+                                                    [enableAutoCountrySelect]="false" [selectFirstCountry]="false"
+                                                    [enablePlaceholder]="true" [searchCountryPlaceholder]="
+                            'PLACE_HOLDER.PHONE_SEARCH_COUNTRY' | translate
+                          " [searchCountryFlag]="false" [separateDialCode]="true" [phoneValidation]="true"
+                                                    name="mobileNo" formControlName="mobileNo"
+                                                    customPlaceholder="65XXXXXX" class="tel-input">
+                                                </ngx-intl-tel-input>
+                                            </ng-container>
+                                        </div>
+
+                                        <mat-error *ngIf="
+                        addProfileForm['controls']['mobileNo']?.touched &&
+                        addProfileForm['controls']['mobileNo']?.errors?.required
+                      ">
+                                            Contact field is required
+                                        </mat-error>
+                                        <mat-error *ngIf="
+                        addProfileForm.get('mobileNo')?.touched &&
+                        addProfileForm.get('mobileNo')?.invalid &&
+                        addProfileForm['controls']['mobileNo']?.errors
+                          ?.required != true
+                      ">
+                                            Enter valid number
+                                        </mat-error>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 inputdisabl">
+                                <div class="form_field">
+                                    <label for="lname" class="control-label">{{
+                                        "PROFILE-NEW.ROL" | translate
+                                        }}</label>
+                                    <div class="inpu-t">
+                                        <mat-form-field appearance="outline" class="w-100 gray-color">
+                                            <mat-select disabled placeholder="Select"
+                                                [formControl]="addProfileForm.controls['roleId']">
+                                                <mat-option *ngFor="let role of roleList" [value]="role?.id">
+                                                    {{ role?.roleName }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="savebtn-outer d-flex justify-content-end">
+                            <button class="btn-style btn-save" mat-raised-button [disabled]="!addProfileForm.valid"
+                                (click)="submitProfileForm()">{{ "PROFILE-NEW.SAVE" | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="side_container main-page p-m-0">
+        <div class="card p-m-0">
+            <h2 class="main-head">{{ "PROFILE.MYHEAD" | translate }}</h2>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="password-rules">
+                        <h3 class="pl-4"><i class="fa fa-bell"></i> Password rules:</h3>
+                        <br>
+                        <!-- <ul>
+              <li>At least one lowercase letter (a-z)</li>
+              <li>At least one uppercase letter (A-Z)</li>
+              <li>At least 14 Characters</li>
+              <li>At least one number (0-9)</li>
+              <li>At least 1 special symbol (@$,.*)</li>
+            </ul> -->
+
+                        <!-- <h5>Password must contain<br> the following:</h5> -->
+                        <p id="letter" class="wrong" *ngIf="!lowerCase">
+                            At least one lowercase letter (a-z)
+                        </p>
+                        <p id="letter" class="correct" *ngIf="lowerCase">
+                            At least one lowercase letter (a-z)
+                        </p>
+                        <p id="capital" class="correct" *ngIf="upperCase">
+                            At least one uppercase letter (A-Z)
+                        </p>
+                        <p id="capital" class="wrong" *ngIf="!upperCase">
+                            At least one uppercase letter (A-Z)
+                        </p>
+                        <p id="number" class="correct" *ngIf="eightCharLength">
+                            At least 14 Characters
+                        </p>
+                        <p id="number" class="wrong" *ngIf="!eightCharLength">
+                            At least 14 Characters
+                        </p>
+                        <p id="number" class="wrong" *ngIf="!numberCase">
+                            At least one number (0-9)
+                        </p>
+                        <p id="number" class="correct" *ngIf="numberCase">
+                            At least one number (0-9)
+                        </p>
+                        <p id="number" class="correct" *ngIf="specialCase">
+                            At least 1 special symbol (@$,.*)
+                        </p>
+                        <p id="number" class="wrong" *ngIf="!specialCase">
+                            At least 1 special symbol (@$,.*)
+                        </p>
+
+                        <!-- <ul>
+                            <li>
+                                <mat-error class="error" *ngIf="
+changePasswordForm.get('newPassword').touched &&  (changePasswordForm.get('newPassword').hasError('hasSmallCase') ||
+changePasswordForm.get('newPassword').hasError('required'))
+">
+                                    <mat-icon>close</mat-icon>{{ "PROFILE-NEW.AT_LOWERCE" | translate }}</mat-error>
+
+                            </li>
+                            <li>
+                                <mat-error *ngIf="
+changePasswordForm.get('newPassword').touched && (changePasswordForm.get('newPassword').hasError('hasCapitalCase') ||
+changePasswordForm.get('newPassword').hasError('required'))
+">
+                                    <mat-icon>close</mat-icon>{{ "PROFILE-NEW.AT_UPPERCASE" | translate }}</mat-error>
+                            </li>
+                            <li>
+                                <mat-error *ngIf="
+changePasswordForm.get('newPassword').touched && (changePasswordForm.get('newPassword').hasError('minlength') ||
+changePasswordForm.get('newPassword').hasError('required'))
+">
+                                    <mat-icon>close</mat-icon>{{ "PROFILE-NEW.AT_CHARACTERS" | translate }}</mat-error>
+                            </li>
+                            <li>
+                                <mat-error *ngIf="
+changePasswordForm.get('newPassword').touched &&  (changePasswordForm.get('newPassword').hasError('hasNumber') ||
+changePasswordForm.get('newPassword').hasError('required'))
+">
+                                    <mat-icon>close</mat-icon>{{ "PROFILE-NEW.AT_NUMBER" | translate }}</mat-error>
+                            </li>
+                            <li>
+                                <mat-error *ngIf="
+changePasswordForm.get('newPassword').touched && (changePasswordForm.get('newPassword').hasError('hasSpecialCharacters') ||
+changePasswordForm.get('newPassword').hasError('required'))
+">
+                                    <mat-icon>close</mat-icon>{{ "PROFILE-NEW.AT_SYMBOL" | translate }}</mat-error>
+                            </li>
+                        </ul> -->
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <form class="">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form_field">
+                                    <label for="lname" class="control-label">{{
+                                        "PROFILE.CURR-PASS" | translate
+                                        }}</label>
+                                    <div class="inpu-t">
+                                        <mat-form-field appearance="outline" class="w-100">
+                                            <input [formControl]="
+                          changePasswordForm.controls['oldPassword']" [type]="oldPasswordHide ? 'password' : 'text'"
+                                                matInput maxlength="20"
+                                                placeholder="{{ 'PROFILE.CURR-PASS' | translate }}" />
+                                            <mat-icon matSuffix class="eye-icon1"
+                                                (click)="oldPasswordHide = !oldPasswordHide">{{ oldPasswordHide ?
+                                                "visibility_off" : "visibility" }}</mat-icon>
+                                        </mat-form-field>
+                                        <mat-error *ngIf="
+                        changePasswordForm.get('oldPassword').touched &&
+                        changePasswordForm
+                          .get('oldPassword')
+                          .hasError('required')
+                      ">
+                                            old password required
+                                        </mat-error>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form_field  ">
+                                    <label for="lname" class="control-label">{{
+                                        "PROFILE.NEW-PASS" | translate
+                                        }}</label>
+                                    <div class="inpu-t">
+                                        <mat-form-field appearance="outline" class="w-100  ">
+                                            <input [formControl]="
+                          changePasswordForm.controls['newPassword']" [type]="newPasswordHide ? 'password' : 'text'"
+                                                matInput placeholder="{{ 'PROFILE.NEW-PASS' | translate }}"
+                                                (keyup)="validatePassword($event)" minlength="14" maxlength="20" />
+                                            <mat-icon matSuffix class="eye-icon1"
+                                                (click)="newPasswordHide = !newPasswordHide">{{ newPasswordHide ?
+                                                "visibility_off" : "visibility" }}</mat-icon>
+                                        </mat-form-field>
+
+                                        <mat-error *ngIf="
+                        changePasswordForm.get('newPassword').touched &&
+                        changePasswordForm
+                          .get('newPassword')
+                          .hasError('required')&& changePasswordForm.get('newPassword')?.invalid
+                      ">
+                                            new password required
+                                        </mat-error>
+
+                                        <p *ngIf="nPassword" class="text-danger current">
+                                            Current password and new password can't be same
+                                        </p>
+
+
+
+
+                                        <p *ngIf="error && newPasswordCheck" class="text-danger   np-err mt-4 ml-2">
+                                            *Password criteria doesn't match</p>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form_field">
+                                    <label for="lname" class="control-label">{{
+                                        "PROFILE.CON-PASS" | translate
+                                        }}</label>
+                                    <div class="inpu-t">
+                                        <mat-form-field appearance="outline" class="w-100">
+                                            <input [formControl]="
+                          changePasswordForm.controls['confPassword']" [type]="confirmPassHide ? 'password' : 'text'"
+                                                minlength="14" matInput
+                                                placeholder="{{ 'PROFILE.CON-PASS' | translate }}"
+                                                (keyup)="confirmPass()" />
+                                            <mat-icon matSuffix class="eye-icon1"
+                                                (click)="confirmPassHide = !confirmPassHide">{{ confirmPassHide ?
+                                                "visibility_off" : "visibility" }}</mat-icon>
+                                        </mat-form-field>
+
+                                        <mat-error *ngIf="
+                        changePasswordForm.get('confPassword').touched &&
+                        changePasswordForm
+                          .get('confPassword')
+                          .hasError('required') 
+                      ">
+                                            confirm password required
+                                        </mat-error>
+
+                                        <p *ngIf="cPassword" class="text-danger p-err ml-2">
+                                            Password doesn't match
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="savebtn-outer d-flex justify-content-end">
+                            <button class="btn-style btn-save" mat-raised-button (click)="SubmitChangePassword()"
+                                [disabled]="!changePasswordForm.valid">{{ "PROFILE-NEW.SAVE" | translate }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <app-footer></app-footer> -->

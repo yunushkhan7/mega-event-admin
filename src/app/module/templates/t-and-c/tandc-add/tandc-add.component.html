@@ -1,0 +1,52 @@
+<div class="green-bg">
+  <section class="visitor-addmision main-page">
+    <div class="container">
+      <div class="visitor-addmission-inner">
+        <section class="visitor-list">
+          <div class="main-heading-div">
+            <h2 class="main-head">{{ "REPORTS.TANDC" | translate }}</h2>
+          </div>
+
+          <form class="addusers" [formGroup]="addForm">
+            <div class="row">
+              <div class="add-feild row">
+                <label class="col-md-3 mt-17">{{ "REPORTS.TANDCNAME" | translate }}
+                  <span class="star">*</span></label>
+                <div class="col-md-9 form-group vmsadd">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <input maxlength="150" [formControl]="addForm.controls['headerText']" matInput placeholder="{{
+                        'VISITOR_LIST.EN_HEADER_TEXT' | translate
+                      }}" />
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row add-feild">
+                <label class="col-md-3 mt-17">{{ "REPORTS.TANDCTEXT" | translate }}
+                  <span class="star">*</span></label>
+                <div class="col-md-9 form-group vmsadd">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <textarea [formControl]="addForm.controls['bodyText']" maxlength="5000" matInput placeholder="{{
+                        'VISITOR_LIST.EN_BODY_TEXT' | translate
+                      }}"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-end d-flex mt-4">
+              <div class="col-md-6 button-save d-flex justify-content-end">
+                <button class="btn-style btn-save" mat-raised-button (click)="saveTermsCondition()">
+                  {{ "VISITOR_LIST.SAVE" | translate }}
+                </button>
+                <button class="btn-style btn-reset" mat-raised-button routerLink="/templates/terms">
+                  {{ "REPORTS.RESET" | translate }}
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- <app-footer></app-footer> -->

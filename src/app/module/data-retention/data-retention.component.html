@@ -1,0 +1,200 @@
+<div class="green-bg">
+  <section class="main-page">
+    <div class="row m-0 mt-2" class="main-div">
+      <div class="main-heading-div">
+        <h2 class="main-head">{{ "DATA_RETENTION.NAME" | translate }}</h2>
+      </div>
+
+      <form
+        class="addusers pt-1 row justify-content-between"
+        [formGroup]="addForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="form-group w-100 input-fildcl">
+          <label for="lname" class="control-label">
+            {{ "DATA_RETENTION.REPORTS_DATA" | translate }}
+          </label>
+          <div class="vmsadd">
+            <mat-form-field appearance="outline" class="w-100">
+              <input
+                [formControl]="addForm.controls['registrationKiosk']"
+                matInput
+                required
+                maxlength="3"
+                min="7"
+                type="number"
+                placeholder="30"
+                keyPressNumeric
+              />
+            </mat-form-field>
+            <mat-error
+              *ngIf="
+                submitted && addForm.controls['registrationKiosk']?.errors
+              "
+            >
+              {{ "VALIDATE.ERROR10" | translate }}
+            </mat-error>
+            <mat-error
+              *ngIf="
+                submitted && addForm.controls['registrationKiosk']?.errors
+              "
+            >
+              {{ "VALIDATE.ERROR1" | translate }}
+            </mat-error>
+          </div>
+        </div>
+        <div class="form-group w-100 input-fildcl">
+          <label for="lname" class="control-label">
+            {{ "DATA_RETENTION.USER_AUDIT" | translate }}
+          </label>
+          <div class="vmsadd">
+            <mat-form-field appearance="outline" class="w-100">
+              <input
+              matInput
+                required
+                maxlength="3"
+                min="7"
+                type="number"
+                [formControl]="addForm.controls['photoReports']"
+                placeholder="30"
+                keyPressNumeric
+              />
+            </mat-form-field>
+            <mat-error
+              *ngIf="submitted && addForm.controls['photoReports']?.errors"
+            >
+              {{ "VALIDATE.ERROR10" | translate }}</mat-error
+            >
+            <mat-error
+              *ngIf="submitted && addForm.controls['photoReports']?.errors"
+            >
+              {{ "VALIDATE.ERROR1" | translate }}</mat-error
+            >
+
+            <!-- <mat-error *ngIf="submitted &&
+            addForm['controls']['photoReports']?.errors?.required
+                  ">
+                  {{ "VALIDATE.ERROR1" | translate }}
+                    </mat-error> -->
+          </div>
+        </div>
+        <div class="form-group w-100 input-fildcl">
+          <label for="lname" class="control-label">
+            {{ "DATA_RETENTION.SYSTEM_LOGS" | translate }}
+          </label>
+          <div class="vmsadd">
+            <mat-form-field appearance="outline" class="w-100">
+              <input
+                [formControl]="addForm.controls['activityLogs']"
+                matInput
+                placeholder="30"
+                required
+                maxlength="3"
+                min="7"
+                type="number"
+                keyPressNumeric
+              />
+            </mat-form-field>
+            <mat-error
+              *ngIf="submitted && addForm.controls['activityLogs']?.errors"
+            >
+              {{ "VALIDATE.ERROR10" | translate }}
+            </mat-error>
+            <mat-error
+              *ngIf="submitted && addForm.controls['activityLogs']?.errors"
+            >
+              {{ "VALIDATE.ERROR1" | translate }}
+            </mat-error>
+          </div>
+        </div>
+        <!-- <div class="form-group w-100 input-fildcl">
+          <label for="lname" class="control-label">
+            {{ "DATA_RETENTION.PASSWORD_EXPIRY" | translate }}
+          </label>
+          <div class="vmsadd">
+            <mat-form-field appearance="outline" class="w-100">
+              <input
+                [formControl]="addForm.controls['passwordExpirationDays']"
+                matInput
+                placeholder="30"
+                required
+                maxlength="2"
+                min="7"
+                type="number"
+                keyPressNumeric
+              />
+            </mat-form-field>
+            <mat-error
+              *ngIf="
+                submitted && addForm.controls['passwordExpirationDays']?.errors
+              "
+            >
+              {{ "VALIDATE.ERROR11" | translate }}</mat-error
+            >
+            <mat-error
+              *ngIf="
+                submitted && addForm.controls['passwordExpirationDays']?.errors
+              "
+            >
+              {{ "VALIDATE.ERROR1" | translate }}</mat-error
+            >
+          </div>
+        </div> -->
+
+        <div class="form-group w-100 input-fildcl">
+          <label for="lname" class="control-label">
+            {{ "DATA_RETENTION.PHOTOKIOSK" | translate }}
+          </label>
+          <div class="vmsadd">
+            <mat-form-field appearance="outline" class="w-100">
+              <input
+                [formControl]="addForm.controls['checkInReports']"
+                matInput
+                placeholder="30"
+                required
+                maxlength="3"
+                min="7"
+                type="number"
+                keyPressNumeric
+              />
+            </mat-form-field>
+            <mat-error
+              *ngIf="
+                submitted && addForm.controls['checkInReports']?.errors
+              "
+            >
+              {{ "VALIDATE.ERROR11" | translate }}</mat-error
+            >
+            <mat-error
+              *ngIf="
+                submitted && addForm.controls['checkInReports']?.errors
+              "
+            >
+              {{ "VALIDATE.ERROR1" | translate }}</mat-error
+            >
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end margin-y">
+          <button
+            class="btn-style btn-save"
+            type="submit"
+            mat-raised-button
+            [disabled]="!addForm.valid"
+          >
+            {{ "SUBMIT_RESET.SUBMIT" | translate }}
+          </button>
+          <button
+            class="btn-style btn-reset"
+            type="button"
+            mat-raised-button
+            (click)="reset()"
+          >
+            {{ "SUBMIT_RESET.RESET" | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+<!-- <app-footer></app-footer> -->

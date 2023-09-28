@@ -1,0 +1,183 @@
+<div class="green-bg">
+    <section class="visitor-addmision main-page">
+        <div class="container">
+            <div class="visitor-addmission-inner">
+                <section class="visitor-list">
+                    <div class="main-heading-div">
+                        <h2 class="main-head">
+                            {{ isEditing ? "Update" : "Add" }} {{ "REPORTS.KIOSKS" | translate }}
+                        </h2>
+                    </div>
+                    <form class="addusers" [formGroup]="addForm" (ngSubmit)="submitForm(addForm.valid)">
+                        <div class="row">
+                            <div class="col-md-6 add-feild inputdisabl">
+                                <label>{{ "REPORTS.KIOSKS-NAME" | translate }}
+                  <span class="star">*</span></label>
+                                <div class="form-group" [ngClass]="{ disable: isEditing }">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'gray-color': isEditing }" appearance="outline">
+                                        <input minlength="3" [formControl]="addForm.controls['kioskName']" matInput type="text" maxlength="100" keyPressAlphaNumericWithHypen [readonly]="isEditing" placeholder="{{ 'REPORTS.KIOSKS-NAME-ENT' | translate }}" />
+                                        <mat-icon class="check-icon-input" matSuffix>check_circle</mat-icon>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="submitted && addForm.controls['kioskName'].errors">Kiosk Name {{ "VALIDATE.ERROR9" | translate }}</mat-error>
+                                    <mat-error *ngIf="addForm.controls['kioskName'].hasError('minlength')">Kiosk Name should be minimum 3 characters</mat-error>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 add-feild">
+                                <label>{{ "REPORTS.KIOSKS-LOCATION" | translate }}
+                  <span class="star">*</span></label>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-select class="readonly-block" placeholder="Select" [formControl]="addForm.controls['locationId']">
+                                            <mat-option *ngFor="let location of locationList" [value]="location?.id">
+                                                {{ location?.name }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="submitted && addForm.controls['locationId'].errors">Kiosk Location {{ "VALIDATE.ERROR9" | translate }}</mat-error>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 add-feild">
+                                <label>{{ "REPORTS.KIOSKS-USERNAME" | translate }}
+                  <span class="star">*</span></label>
+                                <div class="form-group" [ngClass]="{ disable: isEditing }">
+                                    <mat-form-field class="example-full-width" appearance="outline" [ngClass]="{ 'gray-color': isEditing }">
+                                        <input minlength="3" [readonly]="isEditing" [formControl]="addForm.controls['userName']" matInput type="text" maxlength="100" keyPressAlphaNumeric placeholder="{{
+                        'REPORTS.KIOSKS-USERNAME-ENT' | translate
+                      }}" />
+                                        <mat-icon class="check-icon-input" matSuffix>check_circle</mat-icon>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="submitted && addForm.controls['userName'].errors">Username {{ "VALIDATE.ERROR9" | translate }}</mat-error>
+                                    <mat-error *ngIf="addForm.controls['userName'].hasError('minlength')">Username should be of minimum 3 characters</mat-error>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 add-feild">
+                                <label>{{ "REPORTS.KIOSKS-PASSWORD" | translate }}
+              </label>
+                                <div class="form-group" [ngClass]="{ disable: isEditing }">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <input autocomplete="new-password" [type]="hide ? 'password' : 'text'" [formControl]="addForm.controls['password']" matInput placeholder="{{  isEditing ? 'Update Password' : 'Enter Password'}}" type="password" />
+                                        <!-- <mat-icon class="check-icon-input" matSuffix>check_circle</mat-icon> -->
+                                        <mat-icon matSuffix class="eye-icon1" (click)="hide = !hide">{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+
+                                    </mat-form-field>
+                                    <mat-error *ngIf="addForm.controls['password'].touched && addForm.controls['password'].errors">{{ "VALIDATE.ERROR16" | translate }}
+                                    </mat-error>
+                                    <ul>
+                                        <li>
+                                            <mat-error *ngIf="
+                          addForm.get('password').touched &&
+                          (addForm.get('password').hasError('hasSmallCase') ||
+                            addForm.get('password').hasError('required'))
+                        ">
+                                                <mat-icon class="close-icon">close</mat-icon>{{ "PROFILE-NEW.AT_LOWERCE" | translate }}
+                                            </mat-error>
+                                        </li>
+                                        <li>
+                                            <mat-error *ngIf="
+                          addForm.get('password').touched &&
+                          (addForm.get('password').hasError('hasCapitalCase') ||
+                            addForm.get('password').hasError('required'))
+                        ">
+                                                <mat-icon class="close-icon">close</mat-icon>{{ "PROFILE-NEW.AT_UPPERCASE" | translate }}
+                                            </mat-error>
+                                        </li>
+                                        <li>
+                                            <mat-error *ngIf="
+                          addForm.get('password').touched &&
+                          (addForm.get('password').hasError('minlength') ||
+                            addForm.get('password').hasError('required'))
+                        ">
+                                                <mat-icon class="close-icon">close</mat-icon>{{ "PROFILE-NEW.AT_CHARACTERS" | translate }}
+                                            </mat-error>
+                                        </li>
+                                        <li>
+                                            <mat-error *ngIf="
+                          addForm.get('password').touched &&
+                          (addForm.get('password').hasError('hasNumber') ||
+                            addForm.get('password').hasError('required'))
+                        ">
+                                                <mat-icon class="close-icon">close</mat-icon>{{ "PROFILE-NEW.AT_NUMBER" | translate }}
+                                            </mat-error>
+                                        </li>
+                                        <li>
+                                            <mat-error *ngIf="
+                          addForm.get('password').touched &&
+                          (addForm
+                            .get('password')
+                            .hasError('hasSymbols') ||
+                            addForm.get('password').hasError('required'))
+                        ">
+                                                <mat-icon class="close-icon">close</mat-icon>{{ "PROFILE-NEW.AT_SYMBOL" | translate }}
+                                            </mat-error>
+                                        </li>
+                                        <li>
+                                            <mat-error *ngIf="addForm.get('userName').value &&
+                      addForm.get('userName').value ==
+                          addForm.get('password').value
+                        ">
+                                                <mat-icon class="close-icon">close</mat-icon>{{ "PROFILE-NEW.USER_NAME" | translate }}
+                                            </mat-error>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 add-feild">
+                                <label>{{ "REPORTS.KIOSKS-DAILY" | translate }}
+                  <span class="star">*</span></label>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-select class="readonly-block" placeholder="Select" multiple [formControl]="addForm.controls['dailySchedules']">
+                                            <mat-option *ngFor="let schedule of scheduleList" [value]="schedule?.scheduleName">
+                                                {{ schedule?.scheduleName }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="submitted && addForm.controls['dailySchedules'].errors">Daily Schedule {{ "VALIDATE.ERROR9" | translate }}</mat-error>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 add-feild">
+                                <label>{{ "REPORTS.KIOSKS-ROL" | translate }}
+                  <span class="star">*</span></label>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-select class="readonly-block" placeholder="Select" [formControl]="addForm.controls['kioskRole']">
+                                            <!-- <mat-option value="Registration Kiosk">
+                                                Registration Kiosk
+                                            </mat-option> -->
+                                            <mat-option value="Photo Kiosk">
+                                                Photo Kiosk
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-error *ngIf="submitted && addForm.controls['kioskRole'].errors">Kiosk Role {{ "VALIDATE.ERROR9" | translate }}</mat-error>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-end d-flex">
+                            <div class="col-md-6 button-save">
+                                <label>&nbsp;</label>
+                                <div class="justify-content-end d-flex">
+                                    <button class="btn-style btn-save" mat-raised-button  [disabled]="!addForm.valid">
+                    {{ "REPORTS.SUBMIT" | translate }}
+                  </button>
+
+
+                                    <button type="button" class="btn-style btn-cancel" mat-raised-button routerLink="/kiosks">
+                    {{ "VISITOR_LIST.CLOSE" | translate }}
+                  </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- <app-footer></app-footer> -->

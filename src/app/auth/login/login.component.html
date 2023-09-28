@@ -1,0 +1,91 @@
+<section class="login-sec">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 d-none d-md-block">
+                <div class="row">
+                    <div class="auth-side-wrapper"></div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="auth-form-wrapper px-4 py-5">
+                        <div class="inner-wrap">
+                            <div class="logo-sec">
+                                <img src="assets/images/senoko-logo.png" alt=".." />
+                                <p>{{ "LOGIN.TITLE" | translate }}</p>
+                            </div>
+
+                            <form autocomplete="off" [formGroup]="loginForm">
+                                <div class="form-style form-group paddingLabel required">
+                                    <div class="text_field">
+                                        <mat-form-field appearance="outline" class="w-100 h-60">
+                                            <div class="input-img">
+                                                <img src="assets/images/user.png" alt=".." />
+                                            </div>
+                                            <input autocomplete="new-password" type="text" [formControl]="loginForm.controls['userName']" matInput keyPressAlphaNumeric placeholder="{{ 'LOGIN.USERNAME' | translate }}" />
+                                        </mat-form-field>
+                                        <mat-error *ngIf="
+                        loginForm.get('userName').touched &&
+                        loginForm.get('userName').hasError('required')
+                      ">
+                                            Username is required
+                                        </mat-error>
+                                        <!-- <mat-error
+                      *ngIf="submitted && loginForm.controls['userName'].invalid"
+                    >
+                      {{ "VALIDATE.ERROR13" | translate }}
+                    </mat-error> -->
+                                    </div>
+                                    <div class="text_field">
+                                        <mat-form-field appearance="outline" class="w-100 h-60">
+                                            <div class="input-img">
+                                                <img src="assets/images/password.png" alt=".." />
+                                            </div>
+                                            <input class="" autocomplete="new-password" type="password"  [formControl]="loginForm.controls['password']" matInput placeholder="{{
+                          'LOGIN.PASSWORDPLACEHOLDER' | translate
+                        }}" [type]="hide ? 'password' : 'text'" />
+                                            <mat-icon matSuffix class="eye-icon1" (click)="hide = !hide">{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+                                        </mat-form-field>
+                                        <mat-error *ngIf="loginForm.get('password').touched &&
+                                        loginForm.get('password').hasError('required')">Password {{ "VALIDATE.ERROR9" | translate }}
+                                        </mat-error>
+                                    </div>
+
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" (change)="check($event)" />
+                                        <label class="form-check-label" for="flexCheckChecked">
+                      {{ "LOGIN.CHECK" | translate }}
+                    </label>
+                                    </div>
+
+                                    <div class="mb-4 forgot-password">
+                                        <a href="/forgot-password" class="forgot_password">
+                      {{ "LOGIN.FORGOTPASSWORD" | translate }}</a
+                    >
+                  </div>
+
+                  <div class="button_submit">
+                    <button
+                    type="button"
+                      class="loginbutton btn btn-primary"
+                      [disabled]="!loginForm.valid || !typedcheck"
+                      (click)="submitForm()"
+                    >
+                      {{ "LOGIN.CONTINUE" | translate }}
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <div class="copy-rights">
+                <p>
+                  {{ "LOGIN.VERSION" | translate }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

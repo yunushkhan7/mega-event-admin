@@ -1,0 +1,684 @@
+// .expand {
+//   padding: 1rem 0 !important;
+//   justify-content: center;
+// }
+
+// .float-right .mat-stroked-button {
+//   padding: 0 15px;
+//   line-height: 34px;
+//   border: none;
+// }
+
+// .float-right {
+//   justify-content: flex-end;
+//   display: flex;
+//   align-content: flex-end;
+//   text-align: right;
+// }
+// .logo_short {
+//   height: 40px;
+//   width: 40px;
+//   background: #fff;
+//   margin: 0 auto;
+//   border-radius: 50%;
+//   margin-bottom: 20px;
+//   display: none;
+// }
+
+// .side-navbar li a {
+//   color: #fff;
+//   padding: 10px 10px 10px 22px;
+//   font-size: 15px;
+//   transition: all 0.2s ease;
+//   font-weight: 500;
+//   position: relative;
+// }
+
+// .side-navbar li a::after {
+//   position: absolute;
+//   content: "";
+//   background-color: rgba(99, 94, 190, 0.1);
+//   width: 50%;
+//   height: 100%;
+//   left: 0;
+//   top: 0;
+//   z-index: -1;
+//   /* border-radius: 7px; */
+//   opacity: 0;
+//   transition: all 0.2s ease-in;
+// }
+// .w-0 {
+//   width: 0;
+//   visibility: hidden;
+// }
+// /* .side-navbar li a:focus::after, */
+// .side-navbar li a:hover::after {
+//   opacity: 1;
+//   width: 100%;
+// }
+
+// .side-navbar li a.active {
+//   background-color: rgba(99, 94, 190, 0.1);
+//   color: #fff;
+//   border-left: 3px solid #635ebe;
+// }
+// .nav-logo {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   padding: 0px;
+//   cursor: pointer;
+//   img {
+//     margin-bottom: 10px;
+//     margin-top: 20px;
+//   }
+// }
+// .btn_toggle {
+//   background-color: transparent;
+//   border: none;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   @media (max-width: 768px) {
+//     display: none;
+//   }
+//   .icon_rotate {
+//     transform: rotate(180deg);
+//   }
+//   &.mob {
+//     display: none;
+//     @media (max-width: 768px) {
+//       display: block;
+//     }
+//   }
+// }
+// /* SideBarNav */
+// .side-navbar {
+//   height: 100%;
+//   box-shadow: none;
+//   padding: 16px 16px 65px 16px;
+//   border-radius: 0px;
+//   ul {
+//     margin-top: 18px;
+//     .nav-link {
+//       padding: 0;
+//       margin-bottom: 5px;
+//       .dot {
+//         height: 5px;
+//         width: 5px;
+//         margin: 0 8px;
+//         border-radius: 50%;
+//         background-color: var(--color-gray);
+//       }
+//     }
+//     li {
+//       color: var(--color-light-blue);
+//       display: flex;
+//       align-items: center;
+//       padding: 12px 5px;
+//       cursor: pointer;
+//       span {
+//         color: var(--color-gray);
+//       }
+//       &:hover {
+//         .dot {
+//           background-color: var(--color-primary);
+//         }
+//         span {
+//           color: var(--color-primary);
+//         }
+//       }
+//       &.active {
+//         background-color: var(--color-primary);
+//         color: var(--color-primary);
+//         border-radius: 10px;
+//         box-shadow: var(--button-dropdown-shadow);
+//         .mx-2 {
+//           -webkit-user-select: none;
+//           -moz-user-select: none;
+//           user-select: none;
+//           background-repeat: no-repeat;
+//           display: inline-block;
+//           fill: currentColor;
+//           color: var(--white);
+//         }
+//         &.subnav_link {
+//           // background-color: transparent;
+//           // box-shadow: none;
+//           .dot {
+//             background-color: var(--white);
+//             height: 5px;
+//             width: 5px;
+//           }
+//           // .mx-2 {
+//           //   color: var(--color-primary);
+//           // }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// .my-container {
+//   transition: 0.4s;
+// }
+
+// .side-navbar {
+//   .ul_wrap{
+//     overflow-y: scroll;
+//     height: 100%;
+//     padding-bottom: 50px;
+//   }
+//   .ul_wrap::-webkit-scrollbar {
+//     display: none;
+//     /* for Chrome, Safari, and Opera */
+//   }
+// }
+
+// .active-nav {
+//   margin-left: 0;
+// }
+
+// /* for main section */
+// .active-cont {
+//   margin-left: 180px;
+// }
+
+// #menu-btn {
+//   color: #fff;
+//   margin-left: -19px;
+//   margin-top: 0;
+//   position: absolute;
+//   z-index: 999;
+//   top: 50px;
+// }
+
+// .mat-icon {
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   user-select: none;
+//   background-repeat: no-repeat;
+//   display: inline-block;
+//   fill: currentColor;
+//   height: 24px;
+//   width: 24px;
+//   color: var(--color-primary);
+// }
+// .none {
+//   display: none !important;
+// }
+// .hidden {
+//   visibility: hidden !important;
+// }
+// .nav-link .active .mat-icon {
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   user-select: none;
+//   background-repeat: no-repeat;
+//   display: inline-block;
+//   fill: currentColor;
+//   height: 24px;
+//   width: 24px;
+//   color: var(--white);
+// }
+// /* unvisited link */
+// a:link {
+//   color: black;
+// }
+
+// /* visited link */
+// a:visited {
+//   color: #1a58f6;
+// }
+
+// /* mouse over link */
+// a:hover {
+//   color: #1a58f6;
+//   font-size: 18px;
+// }
+// .width-0{
+//   @media (max-width:575px) {
+//     width: 0;
+//   }
+// }
+// /* selected link */
+// a:active {
+//   color: rgb(137, 226, 241);
+// }
+// .mat-card:not {
+//   box-shadow: none;
+// }
+
+// // .side-menu{
+// //   .bg-green-nav{
+// //     color: var(--white);
+// //     background: var(--color-green);
+// //     box-shadow: 0px 10px 24px rgba(22, 202, 96, 0.13);
+// //      border-radius: 5px;
+
+// //      mat-icon{
+// //       color: var(--white);
+// //      }
+// //      span{
+// //       color: var(--white) !important;
+// //      }
+// //   }
+// // }
+
+// .ml-auto{
+//   margin-left: auto;
+// }
+
+// ::ng-deep .search-b{
+//   input{
+//    border-radius: 5px !important;
+//   }
+// }
+
+// .half{
+//     padding: 16px 4px;
+//   .dasboard-link{
+//     justify-content: center;
+//   }
+// }
+
+
+
+
+
+
+
+
+
+// //////////////////////////////////////////////////////
+
+// SJPS Code
+// accordion tab starts
+.accordion-tab>label {
+  display: block;
+  position: relative;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 17.7px;
+  font-family: "Roboto", sans-serif;
+  // transition: all .4s;
+  &.arrow {
+    content: "\f078" !important;
+  }
+}
+
+.accordion-tab .ul {
+  padding: 11px;
+  margin: -14px;
+  margin-top: -24px;
+}
+
+.accordion-tab .a {
+  margin: 30px;
+}
+
+.accordion-tab .a:hover {
+  color: #e84118;
+  text-decoration: none;
+}
+
+.accordion-tab>label:hover {
+  background: linear-gradient(to left, rgba(40, 82, 122), rgba(21, 151, 187));
+  // background-color: #e84118;
+  color: white;
+  outline: none;
+}
+
+.accordion-tab>.accordion-content {
+  max-height: 0;
+  transition: all 0.5s;
+  overflow: hidden;
+}
+
+.accordion-tab>.accordion-toggle:checked~.accordion-content {
+  max-height: 50vh;
+  // padding: 5px;
+}
+
+.accordion-tab .accordion-toggle {
+  display: none;
+}
+
+.accordion-tab>label.arrow::after {
+  content: "\f078";
+  font-family: fontawesome;
+  position: absolute;
+  top: 11px;
+  right: 14px;
+  transform: rotate(-90deg);
+  transition: transform 0.3s;
+  font-size: 10px;
+}
+
+
+
+.accordion-tab>.accordion-toggle:checked~label:after {
+  transform: rotate(4deg);
+}
+
+.accordion-tab .circle {
+  font-size: 7px;
+  position: relative;
+  bottom: 3px;
+}
+
+// accordion tab ends
+.label a {
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 0.97rem;
+}
+
+.label a:hover {
+  background-color: #e84118;
+  color: white;
+}
+
+.accordion-tab1>label {
+  display: block;
+  outline: none;
+  position: relative;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 17.7px;
+}
+
+.accordion-tab1>label:hover {
+  background-color: #e84118;
+  color: #fff;
+  outline: none;
+}
+
+// dashboard
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: 400;
+  font-size: 0.97rem;
+  text-transform: none;
+}
+
+i {
+  padding: 5px;
+}
+
+// a:hover{
+//   color: #e84118;
+// }
+li {
+  list-style-type: none;
+  outline: none;
+  cursor: pointer;
+}
+
+li:hover {
+  color: #e84118;
+}
+
+// li:hover{
+//   color: #e84118;
+// }
+// dashboard
+//  accordion tab 4 starts
+.accordion-tab4>label {
+  display: block;
+  position: relative;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 17.7px;
+}
+
+.accordion-tab4>label:hover {
+  background-color: #e84118;
+  color: white;
+  outline: none;
+}
+
+.accordion-tab4>.accordion-content {
+  max-height: 0;
+  transition: all 0.5s;
+  overflow: hidden;
+}
+
+.accordion-tab4>.accordion-toggle:checked~.accordion-content {
+  max-height: 50vh;
+}
+
+.accordion-tab4 .accordion-toggle {
+  display: none;
+}
+
+.accordion-tab4>label:after {
+  content: "\f078";
+  font-family: fontawesome;
+  position: absolute;
+  top: 15px;
+  right: 14px;
+  transform: rotate(-90deg);
+  transition: transform 0.3s;
+  font-size: 10px;
+}
+
+.accordion-tab4>.accordion-toggle:checked~label:after {
+  transform: rotate(4deg);
+}
+
+.accordion-tab4 .ul {
+  padding: 11px;
+  margin: -14px;
+  margin-top: -24px;
+}
+
+.accordion-tab4 .a {
+  margin: 30px;
+}
+
+.accordion-tab4 .a:hover {
+  color: #e84118;
+}
+
+.accordion-tab4 .circle {
+  font-size: 7px;
+  position: relative;
+  bottom: 3px;
+}
+
+// accordion tab 4 ends
+// operator
+.accordion-tab3>label {
+  display: block;
+  position: relative;
+  padding: 12px 31px;
+  cursor: pointer;
+  top: -13px;
+  font-weight: 400;
+  font-size: 17.7px;
+}
+
+.accordion-tab3>label:hover {
+  // background-color: #e84118;
+  color: #e84118;
+  outline: none;
+}
+
+.accordion-tab3>.accordion-content {
+  max-height: 0;
+  transition: all 0.5s;
+  overflow: hidden;
+}
+
+.accordion-tab3>.accordion-toggle:checked~.accordion-content {
+  max-height: 70vh;
+  // padding: 5px;
+}
+
+.accordion-tab3 .accordion-toggle {
+  display: none;
+}
+
+.accordion-tab3>label:after {
+  content: "\f078";
+  font-family: fontawesome;
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  transform: rotate(-90deg);
+  transition: transform 0.3s;
+  font-size: 10px;
+}
+
+.accordion-tab3>.accordion-toggle:checked~label:after {
+  transform: rotate(4deg);
+}
+
+.label a {
+  padding: 12px 12px;
+  cursor: pointer;
+  font-size: 0.97rem;
+}
+
+.label a:hover {
+  background-color: #e84118;
+  color: white;
+}
+
+// accordion-tab5 starts
+.accordion-tab5>label {
+  display: block;
+  outline: none;
+  position: relative;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 17.7px;
+}
+
+.accordion-tab5>label:hover {
+  background-color: #e84118;
+  color: #fff;
+  outline: none;
+}
+
+.accordion-tab5>.accordion-content {
+  max-height: 0;
+  transition: all 0.5s;
+  overflow: hidden;
+}
+
+.accordion-tab5>.accordion-toggle:checked~.accordion-content {
+  max-height: 50vh;
+  // padding: 5px;
+}
+
+.accordion-tab5 .accordion-toggle {
+  display: none;
+}
+
+.accordion-tab5>label:after {
+  content: "\f078";
+  font-family: fontawesome;
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  transform: rotate(-90deg);
+  transition: transform 0.3s;
+  font-size: 10px;
+}
+
+.accordion-tab5>.accordion-toggle:checked~label:after {
+  transform: rotate(4deg);
+}
+
+.accordion-tab5 .ul {
+  padding: 11px;
+  margin: -14px;
+  margin-top: -24px;
+}
+
+.accordion-tab5 .a {
+  margin: 30px;
+}
+
+.accordion-tab5 .a:hover {
+  color: #e84118;
+}
+
+.accordion-tab5 .circle {
+  font-size: 7px;
+  position: relative;
+  bottom: 3px;
+}
+
+// accordion tab5 ends
+.label a {
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 0.97rem;
+}
+
+.label a:hover {
+  background-color: #e84118;
+  color: white;
+}
+
+.icon{
+  color: #00b0f0;
+}
+
+//  media queries  starts
+@media screen and (max-width: 700px) {
+  .ul {
+      margin-left: -1%;
+  }
+  .a {
+      font-size: 12px;
+      font-family: sans-serif;
+  }
+  .name {
+      font-size: 13px;
+      font-family: sans-serif;
+  }
+  .icon {
+      font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .a {
+      font-size: 8px;
+  }
+  .icon {
+      font-size: 10px;
+  }
+  .label {
+      margin-left: -8%;
+  }
+  .list {
+      margin-left: -8%;
+  }
+}
+
+@media screen and (max-width: 355px) {
+  .ul {
+      margin-left: -17%;
+  }
+  .a {
+      margin-left: 12px;
+  }
+  .list {
+      margin-left: -12%;
+  }
+  .name {
+      font-size: 10px;
+  }
+}
+
+//  media queries ends

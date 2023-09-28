@@ -1,0 +1,80 @@
+<div class="green-bg">
+  <section class="main-page mom">
+    <div class="container">
+      <div class="main-heading-div">
+        <h2 class="main-head">{{ "REPORTS.MEGAADV" | translate }}</h2>
+      </div>
+
+      <form class="addusers">
+        <div class="row">
+          <div class="col-md-12 add-feild">
+            <label>{{ "REPORTS.HOSTN" | translate }}</label>
+            <div class="form-group" [ngClass]="{ disable: isEditing }">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  [formControl]="addForm.controls['userName']"
+                  matInput
+                  type="text"
+                  maxlength="100"
+                  placeholder="192.168.1.01"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-md-12 add-feild">
+            <label>{{ "REPORTS.PROTOCAL" | translate }}</label>
+            <div class="form-group">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-select class="readonly-block" placeholder="HTTP">
+                  <mat-option>HTTP</mat-option>
+                  <mat-option>HTTPS</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-md-12 add-feild">
+            <label>{{ "REPORTS.APIPORT" | translate }}</label>
+            <div class="form-group" [ngClass]="{ disable: isEditing }">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  [formControl]="addForm.controls['userName']"
+                  matInput
+                  type="text"
+                  maxlength="100"
+                  placeholder="8098"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-md-12 add-feild">
+            <label>{{ "REPORTS.APITOKEN" | translate }}</label>
+            <div class="form-group" [ngClass]="{ disable: isEditing }">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  [formControl]="addForm.controls['userName']"
+                  matInput
+                  type="text"
+                  maxlength="100"
+                  placeholder="gy78jkj5345kl3453uh"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end margin-y">
+          <button class="btn-style btn-save" type="submit" mat-raised-button>
+            {{ "REPORTS.SUBMIT" | translate }}
+          </button>
+          <button class="btn-style btn-reset" type="button" mat-raised-button>
+            {{ "REPORTS.RESET" | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+<!-- <app-footer></app-footer> -->

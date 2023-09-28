@@ -1,0 +1,44 @@
+<div class="green-bg">
+  <section class="main-page">
+    <div class="row m-0 mt-2" class="main-div">
+      <div class="main-heading-div">
+        <h2 class="main-head">{{ "REPORTS.ENCRYKEY" | translate }}</h2>
+      </div>
+
+      <form
+        class="addusers pt-1 row justify-content-between"
+        [formGroup]="addForm"
+      >
+        <div class="form-group w-100 input-fildcl">
+          <label for="lname" class="control-label">
+            {{ "REPORTS.QR-CODES" | translate }}
+          </label>
+          <div class="vmsadd">
+            <mat-form-field appearance="outline" class="w-100">
+              <input matInput placeholder="" [formControl]="" />
+            </mat-form-field>
+            <mat-error *ngIf="submitted && addForm.controls['hostName'].errors"
+              >HostName
+              {{ "VALIDATE.ERROR9" | translate }}
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end margin-y">
+          <button
+            class="btn-style btn-save"
+            type="submit"
+            mat-raised-button
+            (click)="SaveAcsServer()"     
+          >
+            {{ "REPORTS.SUBMIT" | translate }}
+          </button>
+          <button class="btn-style btn-reset" type="button" mat-raised-button>
+            {{ "REPORTS.RESET" | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+<!-- <app-footer></app-footer> -->

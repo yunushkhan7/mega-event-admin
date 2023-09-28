@@ -1,0 +1,93 @@
+<div class="green-bg">
+    <section class="visitor-addmision main-page">
+        <div class="container">
+            <div class="visitor-addmission-inner">
+                <div class="main-heading-div">
+                    <h2 class="main-head">{{ "REPORTS.KIOSKS" | translate }}</h2>
+
+                    <button class="add_user" [routerLink]="['add']" *ngIf="currentUser?.roleId == 1">
+            <mat-icon>add</mat-icon> {{ "VISITOR_LIST.ADD_KIOSK" | translate }}
+          </button>
+        </div>
+        <div class="table-entries-header mb-3">
+          <div class="filters"></div>
+        </div>
+        <section class="visitor-list">
+          <div class="table-responsive">
+            <table class="table table-striped table-w">
+              <thead>
+                <tr class="table-thead-tr-color">
+                  <th scope="col">{{ "VISITOR_LIST.SN" | translate }}</th>
+                  <th scope="col">
+                    {{ "KIOSK-LIST.KIOSK-NAME" | translate }}
+                    <img (click)="sortData('kioskName')" src="assets/images/sort.png" />
+                  </th>
+                  <th scope="col">
+                    {{ "KIOSK-LIST.KIOSK-ROLE" | translate }}
+                    <img (click)="sortData('kioskRole')" src="assets/images/sort.png" />
+                  </th>
+                  <th scope="col">
+                    {{ "KIOSK-LIST.KIOSK-LOCATION" | translate }}
+                    <img (click)="sortData('name')" src="assets/images/sort.png" />
+                  </th>
+                  <th scope="col">
+                    {{ "KIOSK-LIST.KIOSK-SCHEDULES" | translate }}
+                    <img (click)="sortData('DailySchedule')" src="assets/images/sort.png" />
+                  </th>
+                  <!-- <th scope="col">
+                    {{ "KIOSK-LIST.SCHEDULE" | translate }}
+                    <img (click)="sortData('kioskRole')" src="assets/images/sort.png" />
+                  </th> -->
+                  <th scope="col">
+                    {{ "KIOSK-LIST.USERNAME" | translate }}
+                    <img (click)="sortData('userName')" src="assets/images/sort.png" />
+                  </th>
+                  <th scope="col">
+                    {{ "KIOSK-LIST.STATUS" | translate }}
+                  </th>
+                  
+                  <th scope="col" *ngIf="currentUser?.roleId == 2 || currentUser?.roleId == 1">{{ "VISITOR_LIST.ACTIONS" | translate }}</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="kioskList">
+                <tr *ngFor="let item of kioskList; let i = index">
+                  <td>{{ sNo[i].sNo }}</td>
+                  <td>{{ item?.kioskName }}</td>
+                  <td>{{ item?.kioskRole }}</td>
+                  <td>{{ item?.kioskLocation }}</td>
+                  <td>{{ item?.dailySchedules }}</td>
+                  <!-- <td>{{ item?.kioskRole }}</td> -->
+                  <td>{{ item?.userName }}</td>
+                  <td>{{ item?.active }}</td>
+                  <td *ngIf="currentUser?.roleId == 2 || currentUser?.roleId == 1">
+                    <div class="actions-btn">
+                    <button>
+                      <mat-icon class="edit" [routerLink]="['edit', item?.id]">edit</mat-icon>
+                    </button>
+                                        <button *ngIf="currentUser?.roleName != 'Admin'">
+                      <mat-icon class="delete" (click)="onDelete(item)">close</mat-icon>
+                    </button>
+                    </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <ng-container *ngIf="!kioskList?.length">
+                                <tr>
+                                    <td colspan="8">
+                                        <p class="datafound">{{ "PROFILE.NO_DATA" | translate }}</p>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </table>
+                    </div>
+
+                    <div class="all-paginator" *ngIf="kioskList.length">
+                        <pagination [paginationList]="pagination" [selectedPageLimit]="currentPageLimit" [currentPage]="currentPage" (onPageChange)="getPage($event)" [lastPage]="lastpage">
+                        </pagination>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- <app-footer></app-footer> -->

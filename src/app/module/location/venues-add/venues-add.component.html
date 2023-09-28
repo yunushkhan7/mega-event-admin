@@ -1,0 +1,74 @@
+<div class="green-bg">
+    <section class="visitor-addmision main-page">
+        <div class="container">
+            <div class="visitor-addmission-inner">
+                <section class="visitor-list">
+                    <div class="main-heading-div">
+                        <h2 class="main-head">{{isEditing ? 'Update':'Add'}} {{'REPORTS.VENUES'|translate}}</h2>
+                    </div>
+                    <form [formGroup]="addForm" (ngSubmit)="submitForm(addForm.valid)">
+                        <div class="head-form">
+                            <div class="d-flex-input form-fields">
+                                <mat-label class="input-label">{{'REPORTS.VENUES-NAME'|translate}} <span class="star">*</span></mat-label>
+                                <div class="form-group api-fill">
+                                    <mat-form-field appearance="fill">
+                                        <input type="text" [formControl]="addForm?.controls['name']" maxlength="50" matInput placeholder="Venue Name" keyPressAlphaNumericWithSpace/>
+                                        <mat-icon class="check-icon-input" matSuffix>check_circle</mat-icon>
+                                        <!-- <div
+                                        *ngIf="addForm.controls['name'].errors">
+                                        <small class="text-danger" *ngIf="addForm.controls['name'].errors?.required">Name Field is required</small>
+                                        </div> -->
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="d-flex-input form-fields">
+                                <mat-label class="input-label">{{'REPORTS.VENUES-CODE'|translate}} <span class="star">*</span></mat-label>
+                                <div class="api-fill">
+                                    <mat-form-field appearance="fill">
+                                        <input type="text" (keydown.space)="$event.preventDefault()" [formControl]="addForm?.controls['code']" maxlength="10" matInput placeholder="Venue Code" />
+                                        <mat-icon class="check-icon-input" matSuffix>check_circle</mat-icon>
+                                        <!-- <div
+                                        *ngIf="(addForm.get('code').invalid && addForm.get('code').touched) || addForm.get('code').dirty">
+                                        <small class="text-danger" *ngIf="addForm.get('code').errors?.required">Code Field is required</small>
+                                        </div> -->
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="d-flex-input form-fields">
+                                <mat-label class="input-label">{{'REPORTS.VENUES-ADDRESS'|translate}} <span class="star">*</span></mat-label>
+                                <div class="api-fill">
+                                    <mat-form-field appearance="fill">
+                                        <textarea type="text" [formControl]="addForm?.controls['address']" maxlength="150" matInput placeholder="Venue Address"></textarea>
+                                    </mat-form-field>
+                                    <!-- <div *ngIf="(addForm.get('address').invalid && addForm.get('address').touched) || addForm.get('address').dirty">
+                                    <small class="text-danger" *ngIf="addForm.get('address').errors?.required">Address Field is required</small>
+                                </div> -->
+                                </div>
+                            </div>
+                            <div class="d-flex-input form-fields">
+                                <mat-label class="input-label">{{'REPORTS.VENUES-REMARKS'|translate}} </mat-label>
+                                <div class="api-fill">
+                                    <mat-form-field appearance="fill">
+                                        <textarea type="text" [formControl]="addForm?.controls['remarks']" maxlength="200" matInput placeholder="Remarks"></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="justify-content-end d-flex mt-5">
+                            <button type="submit" class="btn-style btn-save" mat-raised-button [disabled]="!addForm.valid">
+              {{'REPORTS.SUBMIT'|translate}}
+            </button>
+
+
+                            <button type="button" class="btn-style btn-cancel" mat-raised-button routerLink="/location">
+                    {{ "VISITOR_LIST.CLOSE" | translate }}
+                  </button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- <app-footer></app-footer> -->

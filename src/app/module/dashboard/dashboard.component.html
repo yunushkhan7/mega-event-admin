@@ -1,0 +1,133 @@
+
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-4  mt-5">
+      <h1>Dashboard</h1>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="green-bg">
+  <div class="main-page">
+    <h2 class="main-heading mb-0">
+      {{ "DASHBOARD-NEW.DASHBAORD" | translate }}
+    </h2>
+    <h4>{{ "DASHBOARD-NEW.SENOKO" | translate }}</h4>
+    <div class="row">
+      <section class="visitor-block">
+        <div class="">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="visitors">
+                <div class="visitor-inner">
+                  <div class="visitors-icon">
+                    <img src="assets/images/visitors-icon.svg" />
+                  </div>
+                  <div class="visitors-details">
+                    <h2>{{ "DASHBOARD.URGENT_ENTRIES" | translate }}</h2>
+                    <p>
+                      {{ registerCountList?.urgentEntries }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="visitors">
+                <div class="visitor-inner">
+                  <div class="visitors-icon contractor">
+                    <img class="contractor" src="assets/images/contractor-icon.png" />
+                  </div>
+                  <div class="visitors-details">
+                    <h2>{{ "DASHBOARD.AD_HOC" | translate }}</h2>
+                    <p>
+                      {{ registerCountList?.adHocRegistrations }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="visitors">
+                <div class="visitor-inner">
+                  <div class="visitors-icon contractor">
+                    <img class="black" src="assets/images/list-icon.png" />
+                  </div>
+                  <div class="visitors-details">
+                    <h2>{{ "DASHBOARD.AVG" | translate }}</h2>
+                    <p>{{ registerCountList?.avgCheckintime }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h4>{{ "DASHBOARD-NEW.SITE" | translate }}</h4>
+            </div>
+          </div>
+
+          <div>
+            <app-doughnut></app-doughnut>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h4>{{ "DASHBOARD-NEW.TODAY_REGISTRATION" | translate }}</h4>
+            </div>
+          </div>
+          <div>
+            <p>{{ todayCount }}</p>
+            <canvas baseChart chartType="line" [datasets]="lineChartData?.dataSets" [labels]="lineChartData?.labels"
+              [options]="chartLine.options" legend="true">
+            </canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h4>{{ "DASHBOARD-NEW.TRAFF" | translate }}</h4>
+              <h5>{{ "DASHBOARD-NEW.VISITOR_CON" | translate }}</h5>
+            </div>
+
+            <div style="display: flex">
+              <button class="mob-btn" mat-raised-button [ngClass]="weekOrMonthOrYear === 'week' ? 'green-color' : ''"
+                (click)="getDsahboardMonthlyWise('week')">
+                Week
+              </button>
+              &nbsp;&nbsp;
+              <button class="mob-btn" mat-raised-button [ngClass]="weekOrMonthOrYear === 'month' ? 'green-color' : ''"
+                (click)="getDsahboardMonthlyWise('month')">
+                Month
+              </button>
+              &nbsp;&nbsp;
+              <button class="mob-btn" mat-raised-button [ngClass]="weekOrMonthOrYear === 'year' ? 'green-color' : ''"
+                (click)="getDsahboardMonthlyWise('year')">
+                Year
+              </button>
+            </div>
+          </div>
+          <div>
+            <canvas baseChart chartType="bar" [datasets]="barChartData?.dataSets" [labels]="barChartData?.labels"
+              [options]="chart.options" legend="true">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer> -->

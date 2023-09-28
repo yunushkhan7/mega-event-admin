@@ -1,0 +1,161 @@
+<div class="green-bg">
+    <section class="visitor-addmision main-page">
+        <div class="container">
+            <div class="main-heading-div">
+                <h2 class="main-head">{{ "LOGS.ACTIVITY_LOGS" | translate }}</h2>
+            </div>
+
+            <div class="visitor-addmission-inner">
+                <div class="system-log-form addusers">
+                    <mat-accordion>
+                        <mat-expansion-panel [expanded]="1" (opened)="setStep1(0)" (closed)="panelOpenState1 = false" hideToggle>
+                            <mat-expansion-panel-header #panelH1 (click)="panelH1._toggle()">
+                                <mat-panel-title class="d-flex justify-content-between align-items-center">
+                                    <h3>{{ "LOGS.SUB_HEAD2" | translate }}</h3>
+                                </mat-panel-title>
+
+                                <div class="pannel-icon mr-7" matTooltip="download_excel" (click)="downloadExcel()">
+                                    <img src="assets/images/excel.svg" />
+                                </div>
+
+                                <div class="pannel-icon" (click)="reset()" matTooltip="reset">
+                                    <mat-icon class="icon-s">refresh</mat-icon>
+                                </div>
+
+                                <mat-icon matTooltip="expand_more" *ngIf="!panelOpenState1" (click)="panelH1._toggle()">expand_more
+                                </mat-icon>
+                                <mat-icon matTooltip="expand_less" *ngIf="panelOpenState1" (click)="panelH1._toggle()">expand_less
+                                </mat-icon>
+                            </mat-expansion-panel-header>
+
+                            <div class="audit-row select-item">
+                                <div class="add-feild optbox">
+                                    <mat-form-field appearance="outline">
+                                        <mat-select [(value)]="selectedSource" placeholder="Source">
+                                            <mat-option *ngFor="let item of sourceArray" value={{item?.value}}>{{item?.viewValue}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="add-feild">
+                                    <div class="form-group vmsadd">
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-select [(value)]="text" placeholder="Module">
+                                                <mat-option *ngFor="let item of moduleArray" value={{item}}>{{item}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="add-feild">
+                                    <div class="form-group vmsadd">
+                                        <mat-form-field appearance="outline">
+                                            <input matInput [ngxMatDatetimePicker]="picker" [max]="maxDate" [(ngModel)]="selectedDate" (dateChange)="eDateChangedStart($event)" placeholder="{{ 'LOGS.DATE' | translate }}" />
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="false" [enableMeridian]="false">
+                                                <ng-template>
+                                                    <span>OK</span>
+                                                </ng-template>
+                                            </ngx-mat-datetime-picker>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="add-feild">
+                                    <div class="form-group vmsadd">
+                                        <mat-form-field appearance="outline">
+                                            <input [(ngModel)]="text2" matInput placeholder="{{ 'LOGS.USERNAME' | translate }}" keyPressAlphaNumeric />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="button-right">
+                                    <button class="Search_user w-100" (click)="getLogs()">
+                    {{ "LOGS.SEARCH" | translate }}
+                  </button>
+                                </div>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+                <!-- <div class="table-entries-header mb-4">
+          <div class="show"></div>
+          <div class="filters">
+            <div class="search-box">
+              <search-box (text)="searchObject($event)" [placeholder]="'Search here...'"></search-box>
+            </div>
+          </div>
+        </div> -->
+
+                <section class="visitor-list">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-w" #epltable>
+                            <thead>
+                                <tr class="table-thead-tr-color">
+                                    <!-- <th scope="col">{{ "VISITOR_LIST.SN" | translate }}</th> -->
+                                    <th scope="col">
+                                        {{ "LOGS.UA_TABLE.SOURCE_UA" | translate }}
+                                        <img (click)="sortData('isError')" src="assets/images/sort.png" />
+                                    </th>
+                                    <th scope="col">
+                                        {{ "LOGS.UA_TABLE.CAPTURE_UA" | translate }}
+                                        <img (click)="sortData('activityOn')" src="assets/images/sort.png" />
+                                    </th>
+                                    <th scope="col">
+                                        {{ "LOGS.UA_TABLE.MODULE_UA" | translate }}
+                                        <img (click)="sortData('module')" src="assets/images/sort.png" />
+                                    </th>
+                                    <th scope="col">
+                                        {{ "LOGS.UA_TABLE.API_METHOD" | translate }}
+                                        <img (click)="sortData('action')" src="assets/images/sort.png" />
+                                    </th>
+                                    <th scope="col">
+                                        {{ "LOGS.UA_TABLE.API_CONTEXT" | translate }}
+                                        <!-- <img (click)="sortData('information')" src="assets/images/sort.png" /> -->
+                                    </th>
+                                    <!-- <th scope="col">
+                                        {{ "LOGS.UA_TABLE.EXCEPTION" | translate }}
+                                        <img (click)="sortData('exception')" src="assets/images/sort.png" />
+                                    </th> -->
+                                    
+                                    <th scope="col">
+                                        {{ "LOGS.UA_TABLE.USER_NAME" | translate }}
+                                        <img (click)="sortData('owner')" src="assets/images/sort.png" />
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="logsData?.length">
+                                <tr *ngFor="let log of logsData; let i = index">
+                                    <!-- <td>{{ log?.sNo }}</td> -->
+                                    <td>{{ log?.isError ? 'ERROR' : 'INFO' }}</td>
+                                    <td>
+                                        {{ log?.activityOn | date : "dd-M-yyyy HH:mm " }}
+                                    </td>
+                                    <td>{{ log?.module }}</td>
+                                    <td>
+                                        {{ log?.action}}
+                                    </td>
+                                    <td class="cls_information">
+                                        {{ log?.otherInfo == '' ? 'N/A' : log?.otherInfo }}
+                                    </td>
+                                   
+                                    <!-- <td>{{ log?.exceptionInfo == '' ? 'N/A' : log?.exceptionInfo }}</td> -->
+                                    <td>{{ log?.owner }}</td>
+                                </tr>
+                            </tbody>
+                            <ng-container *ngIf="!logsData?.length">
+                                <tr>
+                                    <td colspan="6">
+                                        <p class="datafound">{{ "PROFILE.NO_DATA" | translate }}</p>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </table>
+                    </div>
+
+                    <div class="all-paginator" *ngIf="logsData?.length">
+                        <pagination [paginationList]="pagination" [selectedPageLimit]="currentPageLimit" [currentPage]="currentPage" (onPageChange)="getPage($event)" [lastPage]="lastpage"></pagination>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- <app-footer></app-footer> -->
